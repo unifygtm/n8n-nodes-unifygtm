@@ -9,7 +9,7 @@ export class UnifyApi implements ICredentialType {
 	name = 'unifyApi';
 	displayName = 'Unify API';
 	documentationUrl = 'https://docs.unifygtm.com/developers/api/data/overview';
-	icon = 'file:../nodes/Unify/unify.svg' as const;
+	icon = 'file:../nodes/Unify/unify.png' as const;
 	properties: INodeProperties[] = [
 		{
 			displayName: 'API Key',

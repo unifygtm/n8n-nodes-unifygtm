@@ -6,4 +6,5 @@
 - Add cursor/page pagination, output limits, item linkage and validation.
 - Preserve mutation responses and avoid automatic write retries.
 - Add generated Make custom app source, contract tests and release workflows.
+- Use the orange Unify monogram for node, credentials and Make app branding.
 - Keep Analytics outside the shipped package pending a non-mutating credential check.

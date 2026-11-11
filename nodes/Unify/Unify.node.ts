@@ -12,7 +12,7 @@ export class Unify implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Unify',
 		name: 'unify',
-		icon: { light: 'file:unify.svg', dark: 'file:unify.dark.svg' },
+		icon: { light: 'file:unify.png', dark: 'file:unify.png' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',

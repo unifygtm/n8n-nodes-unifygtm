@@ -6,7 +6,7 @@ The generated source contains 78 API operation modules and one universal API-cal
 
 ## Load in Make
 
-1. Create a Make account and open the custom app developer area. Create a private **Unify** app, version 1.
+1. Create a Make account and open the custom app developer area. Create a private **Unify** app, version 1. Use `assets/unify.png` as the app icon: the official orange monogram on a transparent square canvas.
 2. Copy `base.json` into Base.
 3. Add a basic API-key connection. Copy its Parameters and Communication from `connections/api-key/`. Attach this connection to each module.
 4. For each directory under `modules/`, create a module of the type in `metadata.json`, then paste its Communication, Mappable Parameters and Interface files into the matching editor tabs. Metadata records guide editor setup; they are not an API import payload.
