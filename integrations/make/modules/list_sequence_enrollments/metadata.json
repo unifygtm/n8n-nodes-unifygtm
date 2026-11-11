@@ -1,0 +1,9 @@
+{
+  "name": "list_sequence_enrollments",
+  "label": "List Sequence Enrollments",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Sequence Enrollments in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments"
+}

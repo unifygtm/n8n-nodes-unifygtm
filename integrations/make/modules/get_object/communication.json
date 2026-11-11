@@ -1,0 +1,8 @@
+{
+  "url": "/data/v1/objects/{{encodeURL(parameters.pathObjectName)}}",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "output": "{{body}}"
+  }
+}

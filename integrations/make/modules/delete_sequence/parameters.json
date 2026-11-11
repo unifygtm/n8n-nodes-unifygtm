@@ -1,0 +1,10 @@
+[
+  {
+    "name": "pathId",
+    "label": "Id",
+    "type": "text",
+    "required": true,
+    "help": "String UUID value.",
+    "advanced": false
+  }
+]

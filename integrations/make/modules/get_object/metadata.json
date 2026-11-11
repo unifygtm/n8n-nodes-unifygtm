@@ -1,0 +1,9 @@
+{
+  "name": "get_object",
+  "label": "Get Object",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Get Object in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}"
+}

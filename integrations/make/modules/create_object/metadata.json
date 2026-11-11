@@ -1,0 +1,9 @@
+{
+  "name": "create_object",
+  "label": "Create Object",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Create Object in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects"
+}

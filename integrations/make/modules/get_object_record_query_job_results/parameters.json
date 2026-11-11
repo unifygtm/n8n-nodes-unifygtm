@@ -1,0 +1,41 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object Name",
+    "type": "text",
+    "required": true,
+    "help": "The API name of an object, e.g. `company`, `person`, `opportunity`, or a custom object's API name.",
+    "advanced": false
+  },
+  {
+    "name": "pathJobId",
+    "label": "Job ID",
+    "type": "text",
+    "required": true,
+    "help": "",
+    "advanced": false
+  },
+  {
+    "name": "queryPage",
+    "label": "Page",
+    "type": "integer",
+    "required": false,
+    "help": "",
+    "advanced": true,
+    "validate": {
+      "min": 1
+    }
+  },
+  {
+    "name": "limit",
+    "label": "Limit",
+    "type": "uinteger",
+    "default": 50,
+    "required": true,
+    "validate": {
+      "min": 1,
+      "max": 1000
+    },
+    "help": "Maximum number of records to return in this execution. Make runtime pagination limits also apply."
+  }
+]

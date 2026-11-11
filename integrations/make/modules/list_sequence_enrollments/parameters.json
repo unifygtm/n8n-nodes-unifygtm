@@ -1,0 +1,78 @@
+[
+  {
+    "name": "queryCursor",
+    "label": "Cursor",
+    "type": "text",
+    "required": false,
+    "help": "Opaque cursor returned by the previous page.",
+    "advanced": true
+  },
+  {
+    "name": "querySequenceId",
+    "label": "Sequence ID",
+    "type": "text",
+    "required": false,
+    "help": "String UUID value.",
+    "advanced": true
+  },
+  {
+    "name": "queryPersonId",
+    "label": "Person ID",
+    "type": "text",
+    "required": false,
+    "help": "String UUID value.",
+    "advanced": true
+  },
+  {
+    "name": "queryMailboxId",
+    "label": "Mailbox ID",
+    "type": "text",
+    "required": false,
+    "help": "String UUID value.",
+    "advanced": true
+  },
+  {
+    "name": "queryEnrolledByPlayId",
+    "label": "Enrolled By Play ID",
+    "type": "text",
+    "required": false,
+    "help": "Filter to enrollments created by this play.",
+    "advanced": true
+  },
+  {
+    "name": "queryStatus",
+    "label": "Status",
+    "type": "text",
+    "required": false,
+    "help": "Repeat `status` to filter by multiple enrollment statuses. This initial Make component accepts one value. Use the API call module for repeated filters.",
+    "advanced": true
+  },
+  {
+    "name": "queryUpdatedAfter",
+    "label": "Updated After",
+    "type": "text",
+    "required": false,
+    "help": "Inclusive lower bound on `updated_at`.",
+    "advanced": true
+  },
+  {
+    "name": "queryUpdatedBefore",
+    "label": "Updated Before",
+    "type": "text",
+    "required": false,
+    "help": "Inclusive upper bound on `updated_at`.",
+    "advanced": true
+  },
+  {
+    "name": "limit",
+    "label": "Limit",
+    "type": "uinteger",
+    "default": 50,
+    "required": true,
+    "validate": {
+      "min": 1,
+      "max": 1000
+    },
+    "help": "Maximum number of records to return in this execution. Make runtime pagination limits also apply."
+  }
+]

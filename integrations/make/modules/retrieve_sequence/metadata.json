@@ -1,0 +1,9 @@
+{
+  "name": "retrieve_sequence",
+  "label": "Retrieve Sequence",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Retrieve Sequence in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/sequences/{id}"
+}

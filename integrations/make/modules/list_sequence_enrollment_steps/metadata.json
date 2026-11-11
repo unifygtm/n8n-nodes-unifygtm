@@ -1,0 +1,9 @@
+{
+  "name": "list_sequence_enrollment_steps",
+  "label": "List Sequence Enrollment Steps",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Sequence Enrollment Steps in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments/{id}/steps"
+}

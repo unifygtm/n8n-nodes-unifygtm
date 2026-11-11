@@ -1,0 +1,258 @@
+[
+  {
+    "name": "id",
+    "label": "Id",
+    "type": "text"
+  },
+  {
+    "name": "created_at",
+    "label": "Created At",
+    "type": "text"
+  },
+  {
+    "name": "updated_at",
+    "label": "Updated At",
+    "type": "text"
+  },
+  {
+    "name": "owner",
+    "label": "Owner",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "text"
+      },
+      {
+        "name": "first_name",
+        "label": "First Name",
+        "type": "text"
+      },
+      {
+        "name": "last_name",
+        "label": "Last Name",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "name",
+    "label": "Name",
+    "type": "text"
+  },
+  {
+    "name": "is_paused",
+    "label": "Is Paused",
+    "type": "boolean"
+  },
+  {
+    "name": "send_schedule",
+    "label": "Send Schedule",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "created_at",
+        "label": "Created At",
+        "type": "text"
+      },
+      {
+        "name": "updated_at",
+        "label": "Updated At",
+        "type": "text"
+      },
+      {
+        "name": "is_default",
+        "label": "Is Default",
+        "type": "boolean"
+      },
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text"
+      },
+      {
+        "name": "rules",
+        "label": "Rules",
+        "type": "collection",
+        "spec": [
+          {
+            "name": "time_zone",
+            "label": "Time Zone",
+            "type": "text"
+          },
+          {
+            "name": "send_days",
+            "label": "Send Days",
+            "type": "collection",
+            "spec": [
+              {
+                "name": "1",
+                "label": "1",
+                "type": "array",
+                "spec": {
+                  "type": "any"
+                }
+              },
+              {
+                "name": "2",
+                "label": "2",
+                "type": "array",
+                "spec": {
+                  "type": "any"
+                }
+              },
+              {
+                "name": "3",
+                "label": "3",
+                "type": "array",
+                "spec": {
+                  "type": "any"
+                }
+              },
+              {
+                "name": "4",
+                "label": "4",
+                "type": "array",
+                "spec": {
+                  "type": "any"
+                }
+              },
+              {
+                "name": "5",
+                "label": "5",
+                "type": "array",
+                "spec": {
+                  "type": "any"
+                }
+              },
+              {
+                "name": "6",
+                "label": "6",
+                "type": "array",
+                "spec": {
+                  "type": "any"
+                }
+              },
+              {
+                "name": "7",
+                "label": "7",
+                "type": "array",
+                "spec": {
+                  "type": "any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "skip_us_holidays",
+            "label": "Skip Us Holidays",
+            "type": "boolean"
+          },
+          {
+            "name": "excluded_dates",
+            "label": "Excluded Dates",
+            "type": "array",
+            "spec": {
+              "type": "collection",
+              "spec": [
+                {
+                  "name": "date",
+                  "label": "Date",
+                  "type": "text"
+                },
+                {
+                  "name": "should_recur",
+                  "label": "Should Recur",
+                  "type": "boolean"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "sequence_ruleset",
+    "label": "Sequence Ruleset",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "created_at",
+        "label": "Created At",
+        "type": "text"
+      },
+      {
+        "name": "updated_at",
+        "label": "Updated At",
+        "type": "text"
+      },
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text"
+      },
+      {
+        "name": "is_default",
+        "label": "Is Default",
+        "type": "boolean"
+      },
+      {
+        "name": "automatic_enrollment_task_assignment",
+        "label": "Automatic Enrollment Task Assignment",
+        "type": "text"
+      },
+      {
+        "name": "automatic_enrollment_task_assignment_user_id",
+        "label": "Automatic Enrollment Task Assignment User ID",
+        "type": "text"
+      },
+      {
+        "name": "manual_enrollment_task_assignment",
+        "label": "Manual Enrollment Task Assignment",
+        "type": "text"
+      },
+      {
+        "name": "manual_enrollment_task_assignment_user_id",
+        "label": "Manual Enrollment Task Assignment User ID",
+        "type": "text"
+      },
+      {
+        "name": "opt_out_message",
+        "label": "Opt Out Message",
+        "type": "text"
+      },
+      {
+        "name": "allow_same_sequence_reenrollment",
+        "label": "Allow Same Sequence Reenrollment",
+        "type": "boolean"
+      },
+      {
+        "name": "block_reenrollment_value",
+        "label": "Block Reenrollment Value",
+        "type": "number"
+      },
+      {
+        "name": "block_reenrollment_units",
+        "label": "Block Reenrollment Units",
+        "type": "text"
+      }
+    ]
+  }
+]

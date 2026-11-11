@@ -1,0 +1,9 @@
+{
+  "name": "retrieve_task",
+  "label": "Retrieve Task",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Retrieve Task in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks/{id}"
+}

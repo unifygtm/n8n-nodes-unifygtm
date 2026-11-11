@@ -1,0 +1,9 @@
+{
+  "name": "list_task_query_jobs",
+  "label": "List Task Query Jobs",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Task Query Jobs in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks/query-jobs"
+}

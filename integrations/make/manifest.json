@@ -1,0 +1,717 @@
+{
+  "name": "unifygtm",
+  "label": "Unify",
+  "version": 1,
+  "status": "source-draft-awaiting-runtime-validation",
+  "modules": [
+    {
+      "name": "create_event_query_job",
+      "label": "Create Event Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Event Query Job in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/events/query-jobs"
+    },
+    {
+      "name": "list_event_query_jobs",
+      "label": "List Event Query Jobs",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Event Query Jobs in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/events/query-jobs"
+    },
+    {
+      "name": "get_event_query_job",
+      "label": "Get Event Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Event Query Job in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/events/query-jobs/{job_id}"
+    },
+    {
+      "name": "cancel_event_query_job",
+      "label": "Cancel Event Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Cancel Event Query Job in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/events/query-jobs/{job_id}/cancel"
+    },
+    {
+      "name": "get_event_query_job_results",
+      "label": "Get Event Query Job Results",
+      "type": "search",
+      "connection": "api-key",
+      "description": "Get Event Query Job Results in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/events/query-jobs/{job_id}/results"
+    },
+    {
+      "name": "list_lists",
+      "label": "List Lists",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Lists in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists"
+    },
+    {
+      "name": "create_list",
+      "label": "Create List",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create List in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists"
+    },
+    {
+      "name": "get_list",
+      "label": "Get List",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get List in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists/{list_id}"
+    },
+    {
+      "name": "update_list",
+      "label": "Update List",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Update List in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists/{list_id}"
+    },
+    {
+      "name": "delete_list",
+      "label": "Delete List",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete List in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists/{list_id}"
+    },
+    {
+      "name": "list_list_entries",
+      "label": "List List Entries",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List List Entries in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists/{list_id}/entries"
+    },
+    {
+      "name": "add_list_entries",
+      "label": "Add List Entries",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Add List Entries in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists/{list_id}/entries/add"
+    },
+    {
+      "name": "remove_list_entries",
+      "label": "Remove List Entries",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Remove List Entries in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists/{list_id}/entries/remove"
+    },
+    {
+      "name": "get_list_entry",
+      "label": "Get List Entry",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get List Entry in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/lists/{list_id}/entries/{entry_id}"
+    },
+    {
+      "name": "list_objects",
+      "label": "List Objects",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Objects in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects"
+    },
+    {
+      "name": "create_object",
+      "label": "Create Object",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Object in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects"
+    },
+    {
+      "name": "get_object",
+      "label": "Get Object",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Object in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}"
+    },
+    {
+      "name": "update_object",
+      "label": "Update Object",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Update Object in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}"
+    },
+    {
+      "name": "delete_object",
+      "label": "Delete Object",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete Object in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}"
+    },
+    {
+      "name": "list_object_attributes",
+      "label": "List Object Attributes",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Object Attributes in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes"
+    },
+    {
+      "name": "create_object_attribute",
+      "label": "Create Object Attribute",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Object Attribute in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes"
+    },
+    {
+      "name": "get_object_attribute",
+      "label": "Get Object Attribute",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Object Attribute in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}"
+    },
+    {
+      "name": "update_object_attribute",
+      "label": "Update Object Attribute",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Update Object Attribute in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}"
+    },
+    {
+      "name": "delete_object_attribute",
+      "label": "Delete Object Attribute",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete Object Attribute in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}"
+    },
+    {
+      "name": "list_object_attribute_options",
+      "label": "List Object Attribute Options",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Object Attribute Options in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options"
+    },
+    {
+      "name": "create_object_attribute_option",
+      "label": "Create Object Attribute Option",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Object Attribute Option in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options"
+    },
+    {
+      "name": "get_object_attribute_option",
+      "label": "Get Object Attribute Option",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Object Attribute Option in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}"
+    },
+    {
+      "name": "update_object_attribute_option",
+      "label": "Update Object Attribute Option",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Update Object Attribute Option in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}"
+    },
+    {
+      "name": "delete_object_attribute_option",
+      "label": "Delete Object Attribute Option",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete Object Attribute Option in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}"
+    },
+    {
+      "name": "create_object_record_query_job",
+      "label": "Create Object Record Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Object Record Query Job in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/query-jobs"
+    },
+    {
+      "name": "list_object_record_query_jobs",
+      "label": "List Object Record Query Jobs",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Object Record Query Jobs in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/query-jobs"
+    },
+    {
+      "name": "get_object_record_query_job",
+      "label": "Get Object Record Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Object Record Query Job in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/query-jobs/{job_id}"
+    },
+    {
+      "name": "cancel_object_record_query_job",
+      "label": "Cancel Object Record Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Cancel Object Record Query Job in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/query-jobs/{job_id}/cancel"
+    },
+    {
+      "name": "get_object_record_query_job_results",
+      "label": "Get Object Record Query Job Results",
+      "type": "search",
+      "connection": "api-key",
+      "description": "Get Object Record Query Job Results in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/query-jobs/{job_id}/results"
+    },
+    {
+      "name": "create_object_record",
+      "label": "Create Object Record",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Object Record in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/records"
+    },
+    {
+      "name": "find_unique_object_record",
+      "label": "Find Unique Object Record",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Find Unique Object Record in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/records/find-unique"
+    },
+    {
+      "name": "upsert_object_record",
+      "label": "Upsert Object Record",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Upsert Object Record in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/records/upsert"
+    },
+    {
+      "name": "get_object_record",
+      "label": "Get Object Record",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Object Record in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/records/{record_id}"
+    },
+    {
+      "name": "update_object_record",
+      "label": "Update Object Record",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Update Object Record in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/records/{record_id}"
+    },
+    {
+      "name": "delete_object_record",
+      "label": "Delete Object Record",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete Object Record in Unify.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/records/{record_id}"
+    },
+    {
+      "name": "create_sequence_enrollment_step_query_job",
+      "label": "Create Sequence Enrollment Step Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Sequence Enrollment Step Query Job in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollment-steps/query-jobs"
+    },
+    {
+      "name": "list_sequence_enrollment_step_query_jobs",
+      "label": "List Sequence Enrollment Step Query Jobs",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Sequence Enrollment Step Query Jobs in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollment-steps/query-jobs"
+    },
+    {
+      "name": "get_sequence_enrollment_step_query_job",
+      "label": "Get Sequence Enrollment Step Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Sequence Enrollment Step Query Job in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollment-steps/query-jobs/{job_id}"
+    },
+    {
+      "name": "cancel_sequence_enrollment_step_query_job",
+      "label": "Cancel Sequence Enrollment Step Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Cancel Sequence Enrollment Step Query Job in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollment-steps/query-jobs/{job_id}/cancel"
+    },
+    {
+      "name": "get_sequence_enrollment_step_query_job_results",
+      "label": "Get Sequence Enrollment Step Query Job Results",
+      "type": "search",
+      "connection": "api-key",
+      "description": "Get Sequence Enrollment Step Query Job Results in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollment-steps/query-jobs/{job_id}/results"
+    },
+    {
+      "name": "get_sequence_enrollment_step",
+      "label": "Get Sequence Enrollment Step",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Sequence Enrollment Step in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollment-steps/{id}"
+    },
+    {
+      "name": "update_sequence_enrollment_step",
+      "label": "Update Sequence Enrollment Step",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Update Sequence Enrollment Step in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollment-steps/{id}"
+    },
+    {
+      "name": "create_sequence_enrollment",
+      "label": "Create Sequence Enrollment",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Sequence Enrollment in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments"
+    },
+    {
+      "name": "list_sequence_enrollments",
+      "label": "List Sequence Enrollments",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Sequence Enrollments in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments"
+    },
+    {
+      "name": "create_sequence_enrollment_query_job",
+      "label": "Create Sequence Enrollment Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Sequence Enrollment Query Job in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/query-jobs"
+    },
+    {
+      "name": "list_sequence_enrollment_query_jobs",
+      "label": "List Sequence Enrollment Query Jobs",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Sequence Enrollment Query Jobs in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/query-jobs"
+    },
+    {
+      "name": "get_sequence_enrollment_query_job",
+      "label": "Get Sequence Enrollment Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Sequence Enrollment Query Job in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/query-jobs/{job_id}"
+    },
+    {
+      "name": "cancel_sequence_enrollment_query_job",
+      "label": "Cancel Sequence Enrollment Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Cancel Sequence Enrollment Query Job in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/query-jobs/{job_id}/cancel"
+    },
+    {
+      "name": "get_sequence_enrollment_query_job_results",
+      "label": "Get Sequence Enrollment Query Job Results",
+      "type": "search",
+      "connection": "api-key",
+      "description": "Get Sequence Enrollment Query Job Results in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/query-jobs/{job_id}/results"
+    },
+    {
+      "name": "get_sequence_enrollment",
+      "label": "Get Sequence Enrollment",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Sequence Enrollment in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/{id}"
+    },
+    {
+      "name": "delete_sequence_enrollment",
+      "label": "Delete Sequence Enrollment",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete Sequence Enrollment in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/{id}"
+    },
+    {
+      "name": "approve_sequence_enrollment",
+      "label": "Approve Sequence Enrollment",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Approve Sequence Enrollment in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/{id}/approve"
+    },
+    {
+      "name": "pause_sequence_enrollment",
+      "label": "Pause Sequence Enrollment",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Pause Sequence Enrollment in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/{id}/pause"
+    },
+    {
+      "name": "resume_sequence_enrollment",
+      "label": "Resume Sequence Enrollment",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Resume Sequence Enrollment in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/{id}/resume"
+    },
+    {
+      "name": "list_sequence_enrollment_steps",
+      "label": "List Sequence Enrollment Steps",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Sequence Enrollment Steps in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/enrollments/{id}/steps"
+    },
+    {
+      "name": "list_sequences",
+      "label": "List Sequences",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Sequences in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/sequences"
+    },
+    {
+      "name": "retrieve_sequence",
+      "label": "Retrieve Sequence",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Retrieve Sequence in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/sequences/{id}"
+    },
+    {
+      "name": "delete_sequence",
+      "label": "Delete Sequence",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete Sequence in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/sequences/{id}"
+    },
+    {
+      "name": "pause_sequence",
+      "label": "Pause Sequence",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Pause Sequence in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/sequences/{id}/pause"
+    },
+    {
+      "name": "resume_sequence",
+      "label": "Resume Sequence",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Resume Sequence in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/sequences/{id}/resume"
+    },
+    {
+      "name": "list_sequence_steps",
+      "label": "List Sequence Steps",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Sequence Steps in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/sequences/{id}/steps"
+    },
+    {
+      "name": "retrieve_sequence_step",
+      "label": "Retrieve Sequence Step",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Retrieve Sequence Step in Unify.",
+      "api": "sequences",
+      "sourcePath": "/sequences/v1/sequences/{id}/steps/{step_id}"
+    },
+    {
+      "name": "list_tasks",
+      "label": "List Tasks",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Tasks in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks"
+    },
+    {
+      "name": "create_task",
+      "label": "Create Task",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Task in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks"
+    },
+    {
+      "name": "create_task_query_job",
+      "label": "Create Task Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Create Task Query Job in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/query-jobs"
+    },
+    {
+      "name": "list_task_query_jobs",
+      "label": "List Task Query Jobs",
+      "type": "search",
+      "connection": "api-key",
+      "description": "List Task Query Jobs in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/query-jobs"
+    },
+    {
+      "name": "get_task_query_job",
+      "label": "Get Task Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Get Task Query Job in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/query-jobs/{job_id}"
+    },
+    {
+      "name": "cancel_task_query_job",
+      "label": "Cancel Task Query Job",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Cancel Task Query Job in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/query-jobs/{job_id}/cancel"
+    },
+    {
+      "name": "get_task_query_job_results",
+      "label": "Get Task Query Job Results",
+      "type": "search",
+      "connection": "api-key",
+      "description": "Get Task Query Job Results in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/query-jobs/{job_id}/results"
+    },
+    {
+      "name": "retrieve_task",
+      "label": "Retrieve Task",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Retrieve Task in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/{id}"
+    },
+    {
+      "name": "update_task",
+      "label": "Update Task",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Update Task in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/{id}"
+    },
+    {
+      "name": "delete_task",
+      "label": "Delete Task",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Delete Task in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/{id}"
+    },
+    {
+      "name": "complete_task",
+      "label": "Complete Task",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Complete Task in Unify.",
+      "api": "tasks",
+      "sourcePath": "/tasks/v1/tasks/{id}/complete"
+    },
+    {
+      "name": "make_api_call",
+      "label": "Make an API Call",
+      "type": "universal",
+      "connection": "api-key",
+      "description": "Performs an arbitrary authorized API call."
+    }
+  ]
+}

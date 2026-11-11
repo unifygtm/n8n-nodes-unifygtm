@@ -1,0 +1,11 @@
+{
+  "url": "/sequences/v1/enrollment-steps/{{encodeURL(parameters.pathId)}}",
+  "method": "PATCH",
+  "encodeUrl": false,
+  "body": "{{parseJSON(ifempty(parameters.requestBody, '{}'))}}",
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

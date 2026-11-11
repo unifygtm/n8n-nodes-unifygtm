@@ -1,0 +1,10 @@
+{
+  "url": "/tasks/v1/tasks/{{encodeURL(parameters.pathId)}}/complete",
+  "method": "POST",
+  "encodeUrl": false,
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

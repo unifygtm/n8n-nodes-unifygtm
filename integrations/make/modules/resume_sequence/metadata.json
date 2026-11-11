@@ -1,0 +1,9 @@
+{
+  "name": "resume_sequence",
+  "label": "Resume Sequence",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Resume Sequence in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/sequences/{id}/resume"
+}

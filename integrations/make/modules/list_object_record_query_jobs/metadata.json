@@ -1,0 +1,9 @@
+{
+  "name": "list_object_record_query_jobs",
+  "label": "List Object Record Query Jobs",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Object Record Query Jobs in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/query-jobs"
+}

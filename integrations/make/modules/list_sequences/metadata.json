@@ -1,0 +1,9 @@
+{
+  "name": "list_sequences",
+  "label": "List Sequences",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Sequences in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/sequences"
+}

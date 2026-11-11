@@ -1,0 +1,17 @@
+[
+  {
+    "name": "job_id",
+    "label": "Job ID",
+    "type": "text"
+  },
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "expires_at",
+    "label": "Expires At",
+    "type": "text"
+  }
+]

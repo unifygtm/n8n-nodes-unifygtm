@@ -1,0 +1,9 @@
+{
+  "name": "get_object_attribute_option",
+  "label": "Get Object Attribute Option",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Get Object Attribute Option in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}"
+}

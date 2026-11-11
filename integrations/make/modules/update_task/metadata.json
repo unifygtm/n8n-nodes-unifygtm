@@ -1,0 +1,9 @@
+{
+  "name": "update_task",
+  "label": "Update Task",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Update Task in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks/{id}"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "create_list",
+  "label": "Create List",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Create List in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists"
+}

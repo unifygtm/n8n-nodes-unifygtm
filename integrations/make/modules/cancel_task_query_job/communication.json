@@ -1,0 +1,8 @@
+{
+  "url": "/tasks/v1/tasks/query-jobs/{{encodeURL(parameters.pathJobId)}}/cancel",
+  "method": "POST",
+  "encodeUrl": false,
+  "response": {
+    "output": "{{body}}"
+  }
+}

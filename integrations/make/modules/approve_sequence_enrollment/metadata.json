@@ -1,0 +1,9 @@
+{
+  "name": "approve_sequence_enrollment",
+  "label": "Approve Sequence Enrollment",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Approve Sequence Enrollment in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments/{id}/approve"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "upsert_object_record",
+  "label": "Upsert Object Record",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Upsert Object Record in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/records/upsert"
+}

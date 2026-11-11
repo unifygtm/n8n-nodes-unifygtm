@@ -1,0 +1,9 @@
+{
+  "name": "delete_list",
+  "label": "Delete List",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Delete List in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists/{list_id}"
+}

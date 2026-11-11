@@ -1,0 +1,12 @@
+{
+  "url": "/data/v1/objects/{{encodeURL(parameters.pathObjectName)}}/attributes",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.data}}",
+    "output": {
+      "result": "{{item}}"
+    },
+    "limit": "{{parameters.limit}}"
+  }
+}

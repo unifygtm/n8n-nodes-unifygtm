@@ -1,0 +1,10 @@
+{
+  "url": "/data/v1/events/query-jobs/{{encodeURL(parameters.pathJobId)}}",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

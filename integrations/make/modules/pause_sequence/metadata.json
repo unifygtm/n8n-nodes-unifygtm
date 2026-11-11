@@ -1,0 +1,9 @@
+{
+  "name": "pause_sequence",
+  "label": "Pause Sequence",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Pause Sequence in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/sequences/{id}/pause"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "list_list_entries",
+  "label": "List List Entries",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List List Entries in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists/{list_id}/entries"
+}

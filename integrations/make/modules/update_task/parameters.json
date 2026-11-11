@@ -1,0 +1,17 @@
+[
+  {
+    "name": "pathId",
+    "label": "Id",
+    "type": "text",
+    "required": true,
+    "help": "",
+    "advanced": false
+  },
+  {
+    "name": "requestBody",
+    "label": "Request Body (JSON)",
+    "type": "text",
+    "required": true,
+    "help": "Enter the complete JSON request body for update_task. Preserve JSON types. See docs/operation-contracts.json and the Unify API reference."
+  }
+]

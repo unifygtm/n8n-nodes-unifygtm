@@ -1,0 +1,13 @@
+{
+  "url": "/sequences/v1/sequences/{{encodeURL(parameters.pathId)}}/steps/{{encodeURL(parameters.pathStepId)}}",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  },
+  "qs": {
+    "include_draft": "{{parameters.queryIncludeDraft}}"
+  }
+}

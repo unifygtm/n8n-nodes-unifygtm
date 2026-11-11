@@ -1,0 +1,9 @@
+{
+  "name": "update_object_attribute",
+  "label": "Update Object Attribute",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Update Object Attribute in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}"
+}

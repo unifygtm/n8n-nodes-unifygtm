@@ -1,0 +1,9 @@
+{
+  "name": "create_task",
+  "label": "Create Task",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Create Task in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks"
+}

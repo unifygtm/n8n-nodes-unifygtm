@@ -1,0 +1,21 @@
+{
+  "url": "/data/v1/events/query-jobs",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.jobs}}",
+    "output": "{{item}}",
+    "limit": "{{parameters.limit}}"
+  },
+  "pagination": {
+    "qs": {
+      "cursor": "{{body.next_cursor}}"
+    },
+    "condition": "{{body.next_cursor}}"
+  },
+  "qs": {
+    "cursor": "{{parameters.queryCursor}}",
+    "status": "{{parameters.queryStatus}}",
+    "limit": "{{min(parameters.limit, 100)}}"
+  }
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "pathId",
+    "label": "Id",
+    "type": "text",
+    "required": true,
+    "help": "String UUID value.",
+    "advanced": false
+  },
+  {
+    "name": "requestBody",
+    "label": "Request Body (JSON)",
+    "type": "text",
+    "required": true,
+    "help": "Enter the complete JSON request body for update_sequence_enrollment_step. Preserve JSON types. See docs/operation-contracts.json and the Unify API reference."
+  }
+]

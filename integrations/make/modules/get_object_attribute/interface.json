@@ -1,0 +1,12 @@
+[
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "data",
+    "label": "Data",
+    "type": "any"
+  }
+]

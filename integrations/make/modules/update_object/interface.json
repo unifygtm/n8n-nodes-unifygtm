@@ -1,0 +1,34 @@
+[
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "data",
+    "label": "Data",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "provider",
+        "label": "Provider",
+        "type": "text"
+      },
+      {
+        "name": "api_name",
+        "label": "Api Name",
+        "type": "text"
+      },
+      {
+        "name": "display_name",
+        "label": "Display Name",
+        "type": "text"
+      },
+      {
+        "name": "description",
+        "label": "Description",
+        "type": "text"
+      }
+    ]
+  }
+]

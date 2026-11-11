@@ -1,0 +1,65 @@
+{
+  "name": "n8n-nodes-unifygtm",
+  "version": "0.1.0",
+  "description": "Unify API node for records, lists, sequences, enrollments and tasks",
+  "license": "MIT",
+  "homepage": "https://docs.unifygtm.com/",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "author": {
+    "name": "Rocco Totaro",
+    "email": "rocco@unifygtm.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unifygtm/n8n-nodes-unifygtm.git"
+  },
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "release": "n8n-node release",
+    "prepublishOnly": "n8n-node prerelease",
+    "test": "npm run build && node --test tests/*.test.cjs",
+    "generate": "python3 scripts/generate.py && python3 scripts/generate_make.py",
+    "check": "npm run lint && npm test"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": [
+      "dist/credentials/UnifyApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Unify/Unify.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "0.57.1",
+    "eslint": "9.32.0",
+    "prettier": "3.6.2",
+    "release-it": "^21.1.0",
+    "typescript": "5.9.2",
+    "n8n-workflow": "2.48.1",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/unifygtm/n8n-nodes-unifygtm/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  }
+}

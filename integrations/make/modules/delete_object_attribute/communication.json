@@ -1,0 +1,8 @@
+{
+  "url": "/data/v1/objects/{{encodeURL(parameters.pathObjectName)}}/attributes/{{encodeURL(parameters.pathAttributeName)}}",
+  "method": "DELETE",
+  "encodeUrl": false,
+  "response": {
+    "output": "{{body}}"
+  }
+}

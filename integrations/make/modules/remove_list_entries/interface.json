@@ -1,0 +1,37 @@
+[
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "data",
+    "label": "Data",
+    "type": "array",
+    "spec": {
+      "type": "any"
+    }
+  },
+  {
+    "name": "summary",
+    "label": "Summary",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "total",
+        "label": "Total",
+        "type": "number"
+      },
+      {
+        "name": "removed",
+        "label": "Removed",
+        "type": "number"
+      },
+      {
+        "name": "not_in_list",
+        "label": "Not In List",
+        "type": "number"
+      }
+    ]
+  }
+]

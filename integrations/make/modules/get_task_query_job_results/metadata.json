@@ -1,0 +1,9 @@
+{
+  "name": "get_task_query_job_results",
+  "label": "Get Task Query Job Results",
+  "type": "search",
+  "connection": "api-key",
+  "description": "Get Task Query Job Results in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks/query-jobs/{job_id}/results"
+}

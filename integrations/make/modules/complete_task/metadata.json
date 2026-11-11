@@ -1,0 +1,9 @@
+{
+  "name": "complete_task",
+  "label": "Complete Task",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Complete Task in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks/{id}/complete"
+}

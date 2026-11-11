@@ -1,0 +1,20 @@
+{
+  "url": "/data/v1/lists/{{encodeURL(parameters.pathListId)}}/entries",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.data}}",
+    "output": "{{item}}",
+    "limit": "{{parameters.limit}}"
+  },
+  "pagination": {
+    "qs": {
+      "cursor": "{{body.next_cursor}}"
+    },
+    "condition": "{{body.next_cursor}}"
+  },
+  "qs": {
+    "cursor": "{{parameters.queryCursor}}",
+    "limit": "{{min(parameters.limit, 100)}}"
+  }
+}

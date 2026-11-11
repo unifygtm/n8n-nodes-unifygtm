@@ -1,0 +1,30 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the object.",
+    "advanced": false
+  },
+  {
+    "name": "pathAttributeName",
+    "label": "Attribute Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the attribute.",
+    "advanced": false
+  },
+  {
+    "name": "limit",
+    "label": "Limit",
+    "type": "uinteger",
+    "default": 50,
+    "required": true,
+    "validate": {
+      "min": 1,
+      "max": 1000
+    },
+    "help": "Maximum number of records to return in this execution. Make runtime pagination limits also apply."
+  }
+]

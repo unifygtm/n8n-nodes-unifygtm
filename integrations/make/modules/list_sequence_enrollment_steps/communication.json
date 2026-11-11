@@ -1,0 +1,10 @@
+{
+  "url": "/sequences/v1/enrollments/{{encodeURL(parameters.pathId)}}/steps",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.steps}}",
+    "output": "{{item}}",
+    "limit": "{{parameters.limit}}"
+  }
+}

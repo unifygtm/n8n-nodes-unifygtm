@@ -1,0 +1,44 @@
+[
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "data",
+    "label": "Data",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "created_at",
+        "label": "Created At",
+        "type": "text"
+      },
+      {
+        "name": "updated_at",
+        "label": "Updated At",
+        "type": "text"
+      },
+      {
+        "name": "list_id",
+        "label": "List ID",
+        "type": "text"
+      },
+      {
+        "name": "object",
+        "label": "Object",
+        "type": "text"
+      },
+      {
+        "name": "record_id",
+        "label": "Record ID",
+        "type": "text"
+      }
+    ]
+  }
+]

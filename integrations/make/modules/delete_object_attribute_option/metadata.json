@@ -1,0 +1,9 @@
+{
+  "name": "delete_object_attribute_option",
+  "label": "Delete Object Attribute Option",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Delete Object Attribute Option in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}"
+}

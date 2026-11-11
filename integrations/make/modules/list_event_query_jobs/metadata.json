@@ -1,0 +1,9 @@
+{
+  "name": "list_event_query_jobs",
+  "label": "List Event Query Jobs",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Event Query Jobs in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/events/query-jobs"
+}

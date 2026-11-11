@@ -1,0 +1,9 @@
+{
+  "name": "list_objects",
+  "label": "List Objects",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Objects in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects"
+}

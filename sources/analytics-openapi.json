@@ -1,0 +1,2189 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Unify Analytics API",
+    "summary": "Send website and product analytics data into the Unify platform.",
+    "version": "1",
+    "termsOfService": "https://www.unifygtm.com/legal/terms-and-conditions",
+    "contact": {
+      "name": "Unify Support",
+      "url": "https://www.unifygtm.com/support",
+      "email": "support@unifygtm.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Events"
+    }
+  ],
+  "paths": {
+    "/identify": {
+      "post": {
+        "operationId": "send_identify_event",
+        "description": "Send an \"identify\" event.",
+        "parameters": [
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "description": "Website or application origin allowed for the event source. Required for browser and server-side requests.",
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            },
+            "example": "https://app.your-company.example"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "401": {
+            "description": "Access is unauthorized."
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentifyEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/page": {
+      "post": {
+        "operationId": "send_page_event",
+        "description": "Send a \"page\" event.",
+        "parameters": [
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "description": "Website or application origin allowed for the event source. Required for browser and server-side requests.",
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            },
+            "example": "https://app.your-company.example"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "401": {
+            "description": "Access is unauthorized."
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/track": {
+      "post": {
+        "operationId": "send_track_event",
+        "description": "Send a \"track\" event.",
+        "parameters": [
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "description": "Website or application origin allowed for the event source. Required for browser and server-side requests.",
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            },
+            "example": "https://app.your-company.example"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "401": {
+            "description": "Access is unauthorized."
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackEvent"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "WriteKey": []
+    }
+  ],
+  "components": {
+    "schemas": {
+      "AnalyticsEventBase": {
+        "type": "object",
+        "required": [
+          "type",
+          "visitorId",
+          "timestamp",
+          "context"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AnalyticsEventType",
+            "description": "The type of analytics event being sent."
+          },
+          "visitorId": {
+            "type": "string",
+            "description": "Unique identifier for the visitor that triggered this event."
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Unique identifier for the session in which this event occurred."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the event (in UTC)."
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp at which the request was sent (in UTC). May differ from the\nevent timestamp if sending was delayed."
+          },
+          "context": {
+            "$ref": "#/components/schemas/EventContext",
+            "description": "Contextual information about the client behind the event."
+          }
+        },
+        "description": "Properties that all analytics events share."
+      },
+      "AnalyticsEventType": {
+        "type": "string",
+        "enum": [
+          "page",
+          "track",
+          "identify"
+        ],
+        "description": "Event type supported by the analytics API."
+      },
+      "CampaignParams": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Source of the campaign."
+          },
+          "medium": {
+            "type": "string",
+            "description": "Medium of the campaign."
+          },
+          "campaign": {
+            "type": "string",
+            "description": "Name of the campaign."
+          },
+          "term": {
+            "type": "string",
+            "description": "Term of the campaign."
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the campaign."
+          }
+        },
+        "description": "UTM parameters for tracking marketing campaigns."
+      },
+      "EventContext": {
+        "type": "object",
+        "properties": {
+          "library": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "description": "Name and version of the library used to send the event."
+          },
+          "ip": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ipv4"
+              },
+              {
+                "$ref": "#/components/schemas/ipv6"
+              }
+            ],
+            "description": "IP address for the client that triggered the event."
+          },
+          "locale": {
+            "type": "string",
+            "description": "Locale string for the client that triggered the event."
+          },
+          "userAgent": {
+            "type": "string",
+            "description": "User agent string for the device."
+          },
+          "userAgentData": {
+            "type": "object",
+            "properties": {
+              "brands": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "brand": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "mobile": {
+                "type": "boolean"
+              },
+              "platform": {
+                "type": "string"
+              }
+            },
+            "description": "User agent data for the device."
+          },
+          "utm": {
+            "$ref": "#/components/schemas/CampaignParams",
+            "description": "Marketing campaign information."
+          }
+        },
+        "description": "Contextual client information attached to an analytics event."
+      },
+      "IdentifyEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "visitorId",
+          "timestamp",
+          "context"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "identify"
+            ],
+            "description": "The type of analytics event being sent."
+          },
+          "visitorId": {
+            "type": "string",
+            "description": "Unique identifier for the visitor that triggered this event."
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Unique identifier for the session in which this event occurred."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the event (in UTC)."
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp at which the request was sent (in UTC). May differ from the\nevent timestamp if sending was delayed."
+          },
+          "context": {
+            "$ref": "#/components/schemas/EventContext",
+            "description": "Contextual information about the client behind the event."
+          },
+          "traits": {
+            "$ref": "#/components/schemas/Traits",
+            "deprecated": true
+          },
+          "company": {
+            "$ref": "#/components/schemas/UObjects.CreateOrUpdateUCompanyAttributes",
+            "description": "Information about the company associated with the visitor."
+          },
+          "person": {
+            "$ref": "#/components/schemas/UObjects.CreateOrUpdateUPersonAttributes",
+            "description": "Information about the person associated with the visitor."
+          }
+        },
+        "description": "An identify event is used to send information about a visitor."
+      },
+      "PageEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "visitorId",
+          "timestamp",
+          "context"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "page"
+            ],
+            "description": "The type of analytics event being sent."
+          },
+          "visitorId": {
+            "type": "string",
+            "description": "Unique identifier for the visitor that triggered this event."
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Unique identifier for the session in which this event occurred."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the event (in UTC)."
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp at which the request was sent (in UTC). May differ from the\nevent timestamp if sending was delayed."
+          },
+          "context": {
+            "$ref": "#/components/schemas/EventContext",
+            "description": "Contextual information about the client behind the event."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the page that was viewed."
+          },
+          "properties": {
+            "$ref": "#/components/schemas/PageProperties",
+            "description": "Details about the page that was viewed."
+          }
+        },
+        "description": "A page view event represents a client visiting a page on a website."
+      },
+      "PageProperties": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path of the page (equivalent to `location.pathname`)."
+          },
+          "query": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Query string parameters (equivalent to `location.search`)."
+          },
+          "referrer": {
+            "type": "string",
+            "description": "Referrer page's full URL (equivalent to `document.referrer`)."
+          },
+          "title": {
+            "type": "string",
+            "description": "Page title (equivalent to `document.title`)."
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the page (equivalent to `location.href`)."
+          }
+        },
+        "description": "Details about a page included in a page request."
+      },
+      "TrackEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "visitorId",
+          "timestamp",
+          "context",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "track"
+            ],
+            "description": "The type of analytics event being sent."
+          },
+          "visitorId": {
+            "type": "string",
+            "description": "Unique identifier for the visitor that triggered this event."
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Unique identifier for the session in which this event occurred."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the event (in UTC)."
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp at which the request was sent (in UTC). May differ from the\nevent timestamp if sending was delayed."
+          },
+          "context": {
+            "$ref": "#/components/schemas/EventContext",
+            "description": "Contextual information about the client behind the event."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the event that was tracked."
+          },
+          "properties": {
+            "$ref": "#/components/schemas/TrackProperties",
+            "description": "Details about the event that was tracked."
+          }
+        },
+        "description": "A track event represents a custom action or activity performed by a visitor."
+      },
+      "TrackProperties": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path of the page (equivalent to `location.pathname`)."
+          },
+          "query": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Query string parameters (equivalent to `location.search`)."
+          },
+          "referrer": {
+            "type": "string",
+            "description": "Referrer page's full URL (equivalent to `document.referrer`)."
+          },
+          "title": {
+            "type": "string",
+            "description": "Page title (equivalent to `document.title`)."
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the page (equivalent to `location.href`)."
+          }
+        },
+        "unevaluatedProperties": {},
+        "description": "Details about an event included in a track request."
+      },
+      "Traits": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address of the visitor."
+          }
+        },
+        "description": "Traits for the identify request payload."
+      },
+      "UObjects.CreateOrUpdateUCompanyAttributes": {
+        "type": "object",
+        "required": [
+          "domain"
+        ],
+        "properties": {
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.CreateOrUpdateUAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Physical address of the company."
+          },
+          "corporate_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Corporate phone number of the company."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the company."
+          },
+          "do_not_contact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether contacting this company is disallowed."
+          },
+          "domain": {
+            "$ref": "#/components/schemas/UValues.UUrl",
+            "description": "Website domain of the company."
+          },
+          "employee_count": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UInteger"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Estimated employee count of the company."
+          },
+          "founded": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDate"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Date when the company was founded."
+          },
+          "industry": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Industry the company operates in."
+          },
+          "lead_source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source of the company record."
+          },
+          "linkedin_url": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUrl"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Full LinkedIn profile URL of the company, standardized with an HTTPS\nprefix, `www` subdomain, and trailing slash."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Name of the company."
+          },
+          "record_owner": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceById"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The user that owns the company record."
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UCurrency"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Estimated revenue of the company."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status of the company."
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/UValues.UValue"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "UObjects.CreateOrUpdateUPersonAttributes": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.CreateOrUpdateUAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Physical address of the person."
+          },
+          "company": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceById"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Company associated with the person."
+          },
+          "corporate_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Corporate phone number of the person."
+          },
+          "do_not_call": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether calling this person is disallowed."
+          },
+          "do_not_email": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether emailing this person is disallowed."
+          },
+          "email": {
+            "$ref": "#/components/schemas/UValues.UEmail",
+            "description": "Email address of the person."
+          },
+          "email_opt_out": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether the person has opted out of email communications."
+          },
+          "eu_resident": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether this person is a resident of the European Union."
+          },
+          "first_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "First name of the person."
+          },
+          "last_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Last name of the person."
+          },
+          "lead_source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source of the person record."
+          },
+          "linkedin_url": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUrl"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Full LinkedIn profile URL of the person, standardized with an HTTPS\nprefix, `www` subdomain, and trailing slash."
+          },
+          "mobile_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mobile phone number of the person."
+          },
+          "record_owner": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceById"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The user that owns the person record."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status of the person."
+          },
+          "title": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Job title of the person."
+          },
+          "work_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Work phone number of the person."
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/UValues.UValue"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "UObjects.UCompanyAttributes": {
+        "type": "object",
+        "required": [
+          "domain"
+        ],
+        "properties": {
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Physical address of the company."
+          },
+          "corporate_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Corporate phone number of the company."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Description of the company."
+          },
+          "do_not_contact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether contacting this company is disallowed."
+          },
+          "domain": {
+            "$ref": "#/components/schemas/UValues.UUrl",
+            "description": "Website domain of the company."
+          },
+          "employee_count": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UInteger"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Estimated employee count of the company."
+          },
+          "founded": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDate"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Date when the company was founded."
+          },
+          "industry": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Industry the company operates in."
+          },
+          "last_activity_at": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDatetime"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Last time an activity was recorded for this company.",
+            "readOnly": true
+          },
+          "lead_source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source of the company record."
+          },
+          "linkedin_url": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUrl"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Full LinkedIn profile URL of the company, standardized with an HTTPS\nprefix, `www` subdomain, and trailing slash."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Name of the company."
+          },
+          "record_owner": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceById"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The user that owns the company record."
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UCurrency"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Estimated revenue of the company."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status of the company."
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/UValues.UValue"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "UObjects.UPersonAttributes": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Physical address of the person."
+          },
+          "company": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceById"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Company associated with the person."
+          },
+          "corporate_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Corporate phone number of the person."
+          },
+          "do_not_call": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether calling this person is disallowed."
+          },
+          "do_not_email": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether emailing this person is disallowed."
+          },
+          "email": {
+            "$ref": "#/components/schemas/UValues.UEmail",
+            "description": "Email address of the person."
+          },
+          "email_opt_out": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether the person has opted out of email communications."
+          },
+          "eu_resident": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether this person is a resident of the European Union."
+          },
+          "first_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "First name of the person."
+          },
+          "last_activity_at": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDatetime"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Last time an activity was recorded for this person.",
+            "readOnly": true
+          },
+          "last_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Last name of the person."
+          },
+          "lead_source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source of the person record."
+          },
+          "linkedin_url": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUrl"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Full LinkedIn profile URL of the person, standardized with an HTTPS\nprefix, `www` subdomain, and trailing slash."
+          },
+          "mobile_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mobile phone number of the person."
+          },
+          "record_owner": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceById"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The user that owns the person record."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status of the person."
+          },
+          "title": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Job title of the person."
+          },
+          "work_phone": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Work phone number of the person."
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/UValues.UValue"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "UResponses.BadRequestError": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "path": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "object_api_name": {
+            "type": "string"
+          },
+          "attribute_api_name": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {}
+          }
+        ],
+        "description": "Validation error detail returned for bad request responses."
+      },
+      "UValues.CreateOrUpdateUAddress": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/UValues.UCountry",
+            "description": "Country code in ISO 3166-1 alpha-2 format."
+          },
+          "administrative_area": {
+            "type": "string",
+            "description": "State, province, region, or territory."
+          },
+          "sub_administrative_area": {
+            "type": "string",
+            "description": "County or other secondary governmental division of an administrative area."
+          },
+          "locality": {
+            "type": "string",
+            "description": "City, town, or village."
+          },
+          "dependent_locality": {
+            "type": "string",
+            "description": "Neighborhood, borough, district, or city sector."
+          },
+          "postal_code": {
+            "type": "string",
+            "description": "Postal code or ZIP code."
+          },
+          "thoroughfare": {
+            "type": "string",
+            "description": "Street name with elements such as street type or direction."
+          },
+          "premise": {
+            "type": "string",
+            "description": "Street number or building name."
+          },
+          "sub_premise": {
+            "type": "string",
+            "description": "Apartment, suite, office number, or other secondary unit designator."
+          }
+        },
+        "description": "Composite object representing a physical address.",
+        "title": "UAddress"
+      },
+      "UValues.UAddress": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/UValues.UCountry",
+            "description": "Country code in ISO 3166-1 alpha-2 format."
+          },
+          "administrative_area": {
+            "type": "string",
+            "description": "State, province, region, or territory."
+          },
+          "sub_administrative_area": {
+            "type": "string",
+            "description": "County or other secondary governmental division of an administrative area."
+          },
+          "locality": {
+            "type": "string",
+            "description": "City, town, or village."
+          },
+          "dependent_locality": {
+            "type": "string",
+            "description": "Neighborhood, borough, district, or city sector."
+          },
+          "postal_code": {
+            "type": "string",
+            "description": "Postal code or ZIP code."
+          },
+          "thoroughfare": {
+            "type": "string",
+            "description": "Street name with elements such as street type or direction."
+          },
+          "premise": {
+            "type": "string",
+            "description": "Street number or building name."
+          },
+          "sub_premise": {
+            "type": "string",
+            "description": "Apartment, suite, office number, or other secondary unit designator."
+          },
+          "time_zone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "IANA time zone identifier derived from the country and administrative\narea.",
+            "readOnly": true
+          }
+        },
+        "description": "Composite object representing a physical address.",
+        "title": "UAddress"
+      },
+      "UValues.UBoolean": {
+        "type": "boolean",
+        "description": "Boolean value.",
+        "title": "UBoolean"
+      },
+      "UValues.UCountry": {
+        "type": "object",
+        "required": [
+          "code",
+          "name"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/UValues.UCountryCode",
+            "description": "Country code."
+          },
+          "name": {
+            "type": "string",
+            "description": "Country name."
+          }
+        },
+        "description": "Composite object representing a country.",
+        "title": "UCountry"
+      },
+      "UValues.UCountryCode": {
+        "type": "string",
+        "enum": [
+          "AD",
+          "AE",
+          "AF",
+          "AG",
+          "AI",
+          "AL",
+          "AM",
+          "AO",
+          "AQ",
+          "AR",
+          "AS",
+          "AT",
+          "AU",
+          "AW",
+          "AX",
+          "AZ",
+          "BA",
+          "BB",
+          "BD",
+          "BE",
+          "BF",
+          "BG",
+          "BH",
+          "BI",
+          "BJ",
+          "BL",
+          "BM",
+          "BN",
+          "BO",
+          "BQ",
+          "BR",
+          "BS",
+          "BT",
+          "BV",
+          "BW",
+          "BY",
+          "BZ",
+          "CA",
+          "CC",
+          "CD",
+          "CF",
+          "CG",
+          "CH",
+          "CI",
+          "CK",
+          "CL",
+          "CM",
+          "CN",
+          "CO",
+          "CR",
+          "CU",
+          "CV",
+          "CW",
+          "CX",
+          "CY",
+          "CZ",
+          "DE",
+          "DJ",
+          "DK",
+          "DM",
+          "DO",
+          "DZ",
+          "EC",
+          "EE",
+          "EG",
+          "EH",
+          "ER",
+          "ES",
+          "ET",
+          "FI",
+          "FJ",
+          "FK",
+          "FM",
+          "FO",
+          "FR",
+          "GA",
+          "GB",
+          "GD",
+          "GE",
+          "GF",
+          "GG",
+          "GH",
+          "GI",
+          "GL",
+          "GM",
+          "GN",
+          "GP",
+          "GQ",
+          "GR",
+          "GS",
+          "GT",
+          "GU",
+          "GW",
+          "GY",
+          "HK",
+          "HM",
+          "HN",
+          "HR",
+          "HT",
+          "HU",
+          "ID",
+          "IE",
+          "IL",
+          "IM",
+          "IN",
+          "IO",
+          "IQ",
+          "IR",
+          "IS",
+          "IT",
+          "JE",
+          "JM",
+          "JO",
+          "JP",
+          "KE",
+          "KG",
+          "KH",
+          "KI",
+          "KM",
+          "KN",
+          "KP",
+          "KR",
+          "KW",
+          "KY",
+          "KZ",
+          "LA",
+          "LB",
+          "LC",
+          "LI",
+          "LK",
+          "LR",
+          "LS",
+          "LT",
+          "LU",
+          "LV",
+          "LY",
+          "MA",
+          "MC",
+          "MD",
+          "ME",
+          "MF",
+          "MG",
+          "MH",
+          "MK",
+          "ML",
+          "MM",
+          "MN",
+          "MO",
+          "MP",
+          "MQ",
+          "MR",
+          "MS",
+          "MT",
+          "MU",
+          "MV",
+          "MW",
+          "MX",
+          "MY",
+          "MZ",
+          "NA",
+          "NC",
+          "NE",
+          "NF",
+          "NG",
+          "NI",
+          "NL",
+          "NO",
+          "NP",
+          "NR",
+          "NU",
+          "NZ",
+          "OM",
+          "PA",
+          "PE",
+          "PF",
+          "PG",
+          "PH",
+          "PK",
+          "PL",
+          "PM",
+          "PN",
+          "PR",
+          "PS",
+          "PT",
+          "PW",
+          "PY",
+          "QA",
+          "RE",
+          "RO",
+          "RS",
+          "RU",
+          "RW",
+          "SA",
+          "SB",
+          "SC",
+          "SD",
+          "SE",
+          "SG",
+          "SH",
+          "SI",
+          "SJ",
+          "SK",
+          "SL",
+          "SM",
+          "SN",
+          "SO",
+          "SR",
+          "SS",
+          "ST",
+          "SV",
+          "SX",
+          "SY",
+          "SZ",
+          "TC",
+          "TD",
+          "TF",
+          "TG",
+          "TH",
+          "TJ",
+          "TK",
+          "TL",
+          "TM",
+          "TN",
+          "TO",
+          "TR",
+          "TT",
+          "TV",
+          "TW",
+          "TZ",
+          "UA",
+          "UG",
+          "UM",
+          "US",
+          "UY",
+          "UZ",
+          "VA",
+          "VC",
+          "VE",
+          "VG",
+          "VI",
+          "VN",
+          "VU",
+          "WF",
+          "WS",
+          "XK",
+          "YE",
+          "YT",
+          "ZA",
+          "ZM",
+          "ZW"
+        ],
+        "description": "ISO 3166-1 alpha-2 country code.",
+        "title": "UCountryCode"
+      },
+      "UValues.UCurrency": {
+        "type": "object",
+        "required": [
+          "code",
+          "value"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/UValues.UCurrencyCode",
+            "description": "Currency code."
+          },
+          "value": {
+            "type": "number",
+            "format": "decimal",
+            "description": "Currency value."
+          }
+        },
+        "description": "Composite object representing a currency value.",
+        "title": "UCurrency"
+      },
+      "UValues.UCurrencyCode": {
+        "type": "string",
+        "enum": [
+          "AED",
+          "AFN",
+          "ALL",
+          "AMD",
+          "ANG",
+          "AOA",
+          "ARS",
+          "AUD",
+          "AWG",
+          "AZN",
+          "BAM",
+          "BBD",
+          "BDT",
+          "BGN",
+          "BHD",
+          "BIF",
+          "BMD",
+          "BND",
+          "BOB",
+          "BOV",
+          "BRL",
+          "BSD",
+          "BTN",
+          "BWP",
+          "BYR",
+          "BZD",
+          "CAD",
+          "CDF",
+          "CHE",
+          "CHF",
+          "CHW",
+          "CLF",
+          "CLP",
+          "CNY",
+          "COP",
+          "COU",
+          "CRC",
+          "CUC",
+          "CUP",
+          "CVE",
+          "CZK",
+          "DJF",
+          "DKK",
+          "DOP",
+          "DZD",
+          "EGP",
+          "ERN",
+          "ETB",
+          "EUR",
+          "FJD",
+          "FKP",
+          "GBP",
+          "GEL",
+          "GHS",
+          "GIP",
+          "GMD",
+          "GNF",
+          "GTQ",
+          "GYD",
+          "HKD",
+          "HNL",
+          "HRK",
+          "HTG",
+          "HUF",
+          "IDR",
+          "ILS",
+          "INR",
+          "IQD",
+          "IRR",
+          "ISK",
+          "JMD",
+          "JOD",
+          "JPY",
+          "KES",
+          "KGS",
+          "KHR",
+          "KMF",
+          "KPW",
+          "KRW",
+          "KWD",
+          "KYD",
+          "KZT",
+          "LAK",
+          "LBP",
+          "LKR",
+          "LRD",
+          "LSL",
+          "LTL",
+          "LVL",
+          "LYD",
+          "MAD",
+          "MDL",
+          "MGA",
+          "MKD",
+          "MMK",
+          "MNT",
+          "MOP",
+          "MRO",
+          "MUR",
+          "MVR",
+          "MWK",
+          "MXN",
+          "MXV",
+          "MYR",
+          "MZN",
+          "NAD",
+          "NGN",
+          "NIO",
+          "NOK",
+          "NPR",
+          "NZD",
+          "OMR",
+          "PAB",
+          "PEN",
+          "PGK",
+          "PHP",
+          "PKR",
+          "PLN",
+          "PYG",
+          "QAR",
+          "RON",
+          "RSD",
+          "RUB",
+          "RWF",
+          "SAR",
+          "SBD",
+          "SCR",
+          "SDG",
+          "SEK",
+          "SGD",
+          "SHP",
+          "SLL",
+          "SOS",
+          "SRD",
+          "SSP",
+          "STD",
+          "SYP",
+          "SZL",
+          "THB",
+          "TJS",
+          "TMT",
+          "TND",
+          "TOP",
+          "TRY",
+          "TTD",
+          "TWD",
+          "TZS",
+          "UAH",
+          "UGX",
+          "USD",
+          "USN",
+          "USS",
+          "UYI",
+          "UYU",
+          "UZS",
+          "VEF",
+          "VND",
+          "VUV",
+          "WST",
+          "XAF",
+          "XAG",
+          "XAU",
+          "XBA",
+          "XBB",
+          "XBC",
+          "XBD",
+          "XCD",
+          "XDR",
+          "XOF",
+          "XPD",
+          "XPF",
+          "XPT",
+          "XTS",
+          "XXX",
+          "YER",
+          "ZAR",
+          "ZMW"
+        ],
+        "description": "ISO 4217 currency code.",
+        "title": "UCurrencyCode"
+      },
+      "UValues.UDate": {
+        "type": "string",
+        "description": "String value representing a calendar date in ISO 8601 format (`YYYY-MM-DD`).",
+        "title": "UDate"
+      },
+      "UValues.UDatetime": {
+        "type": "string",
+        "description": "String value representing a UTC datetime in ISO 8601 format\n(`YYYY-MM-DDTHH:mm:ss.sssZ`).",
+        "title": "UDatetime"
+      },
+      "UValues.UDecimal": {
+        "type": "number",
+        "description": "Decimal value.",
+        "title": "UDecimal"
+      },
+      "UValues.UEmail": {
+        "type": "string",
+        "format": "email",
+        "description": "String value representing an email address.",
+        "title": "UEmail"
+      },
+      "UValues.UInteger": {
+        "type": "integer",
+        "description": "Integer value.",
+        "title": "UInteger"
+      },
+      "UValues.UMultiSelect": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "String array that contains strings from a specific set of allowed values.",
+        "title": "UMultiSelect"
+      },
+      "UValues.UPhoneNumber": {
+        "type": "string",
+        "description": "String value representing a phone number.",
+        "title": "UPhoneNumber"
+      },
+      "UValues.UReferenceById": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/UValues.UUuid",
+            "description": "ID of the referenced record."
+          }
+        },
+        "description": "Reference to an object record by ID.",
+        "title": "UReferenceById"
+      },
+      "UValues.UReferenceByMatch": {
+        "type": "object",
+        "required": [
+          "match"
+        ],
+        "properties": {
+          "match": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Attribute values used to find an existing record. Include at least one\nunique attribute. Additional attributes narrow the match."
+          }
+        },
+        "description": "Reference to an object record by attribute values.",
+        "title": "UReferenceByMatch"
+      },
+      "UValues.UReferenceByUpsert": {
+        "type": "object",
+        "required": [
+          "match"
+        ],
+        "properties": {
+          "match": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Attribute values used to find an existing record. Include at least one\nunique attribute. Additional attributes narrow the match."
+          },
+          "create": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Attribute values used when no record matches. These take precedence over\nother creation values."
+          },
+          "update": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Attribute values used when a record matches. These take precedence over\nother update values."
+          },
+          "update_if_empty": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Attribute values applied to a matching record only where the existing\nvalue is `null`. Values in `update` and `create_or_update` take\nprecedence."
+          },
+          "create_or_update": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Attribute values used for both creation and updates. Values in `create`\nor `update` take precedence."
+          },
+          "create_or_update_if_empty": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Attribute values used for creation, or for updates where the existing\nvalue is `null`. Values in all other properties take precedence."
+          }
+        },
+        "description": "Reference to another object record by performing a nested upsert.\n\nAt least one of `create`, `create_or_update`, or `create_or_update_if_empty`\nmust be provided. Together, these properties must include all required\nattributes.",
+        "title": "UReferenceByUpsert"
+      },
+      "UValues.USelect": {
+        "type": "string",
+        "description": "String value that matches one of a specific set of allowed values.",
+        "title": "USelect"
+      },
+      "UValues.UText": {
+        "type": "string",
+        "description": "String value.",
+        "title": "UText"
+      },
+      "UValues.UUrl": {
+        "type": "string",
+        "description": "String value representing a web URL or internet domain.",
+        "title": "UUrl"
+      },
+      "UValues.UUuid": {
+        "type": "string",
+        "description": "String UUIDv4 value.",
+        "title": "UUuid"
+      },
+      "UValues.UValue": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/UValues.UAddress"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UBoolean"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UCountry"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UCurrency"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UDate"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UDatetime"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UDecimal"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UEmail"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UInteger"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UMultiSelect"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UPhoneNumber"
+          },
+          {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceById"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+              }
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/UValues.USelect"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UText"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UUrl"
+          },
+          {
+            "$ref": "#/components/schemas/UValues.UUuid"
+          }
+        ]
+      },
+      "ipv4": {
+        "type": "string",
+        "format": "ipv4"
+      },
+      "ipv6": {
+        "type": "string",
+        "format": "ipv6"
+      },
+      "uuid": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "securitySchemes": {
+      "WriteKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Write-Key",
+        "description": "Use the event source\u2019s write key. Requests also require an allowed Origin header."
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.unifyintent.com/analytics/v1",
+      "variables": {}
+    }
+  ]
+}

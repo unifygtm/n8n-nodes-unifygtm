@@ -1,0 +1,9 @@
+{
+  "name": "find_unique_object_record",
+  "label": "Find Unique Object Record",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Find Unique Object Record in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/records/find-unique"
+}

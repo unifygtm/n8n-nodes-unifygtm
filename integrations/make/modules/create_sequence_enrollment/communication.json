@@ -1,0 +1,11 @@
+{
+  "url": "/sequences/v1/enrollments",
+  "method": "POST",
+  "encodeUrl": false,
+  "body": "{{parseJSON(ifempty(parameters.requestBody, '{}'))}}",
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

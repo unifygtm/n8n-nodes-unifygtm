@@ -1,0 +1,9 @@
+[
+  {
+    "name": "requestBody",
+    "label": "Request Body (JSON)",
+    "type": "text",
+    "required": true,
+    "help": "Enter the complete JSON request body for create_task. Preserve JSON types. See docs/operation-contracts.json and the Unify API reference."
+  }
+]

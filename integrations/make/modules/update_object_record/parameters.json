@@ -1,0 +1,43 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object Name",
+    "type": "text",
+    "required": true,
+    "help": "The API name of an object, e.g. `company`, `person`, `opportunity`, or a custom object's API name.",
+    "advanced": false
+  },
+  {
+    "name": "pathRecordId",
+    "label": "Record ID",
+    "type": "text",
+    "required": true,
+    "help": "",
+    "advanced": false
+  },
+  {
+    "name": "queryValidationMode",
+    "label": "Validation Mode",
+    "type": "select",
+    "required": false,
+    "help": "Validation mode for request data.  - `strict`: Reject requests if any attribute is invalid or unrecognized. - `ignore_invalid`: Ignore unknown attributes and omit invalid values for optional attributes. Reject requests with an invalid body structure or invalid required attributes.",
+    "advanced": true,
+    "options": [
+      {
+        "label": "strict",
+        "value": "strict"
+      },
+      {
+        "label": "ignore_invalid",
+        "value": "ignore_invalid"
+      }
+    ]
+  },
+  {
+    "name": "requestBody",
+    "label": "Request Body (JSON)",
+    "type": "text",
+    "required": true,
+    "help": "Enter the complete JSON request body for update_object_record. Preserve JSON types. See docs/operation-contracts.json and the Unify API reference."
+  }
+]

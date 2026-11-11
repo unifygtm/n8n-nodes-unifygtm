@@ -1,0 +1,9 @@
+{
+  "name": "cancel_event_query_job",
+  "label": "Cancel Event Query Job",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Cancel Event Query Job in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/events/query-jobs/{job_id}/cancel"
+}

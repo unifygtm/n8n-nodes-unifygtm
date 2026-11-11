@@ -1,0 +1,8 @@
+{
+  "url": "/sequences/v1/sequences/{{encodeURL(parameters.pathId)}}/pause",
+  "method": "POST",
+  "encodeUrl": false,
+  "response": {
+    "output": "{{body}}"
+  }
+}

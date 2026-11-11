@@ -1,0 +1,9 @@
+{
+  "name": "create_task_query_job",
+  "label": "Create Task Query Job",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Create Task Query Job in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks/query-jobs"
+}

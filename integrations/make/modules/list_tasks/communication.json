@@ -1,0 +1,26 @@
+{
+  "url": "/tasks/v1/tasks",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.data}}",
+    "output": "{{item}}",
+    "limit": "{{parameters.limit}}"
+  },
+  "pagination": {
+    "qs": {
+      "cursor": "{{body.next_cursor}}"
+    },
+    "condition": "{{body.next_cursor}}"
+  },
+  "qs": {
+    "cursor": "{{parameters.queryCursor}}",
+    "sort_by": "{{parameters.querySortBy}}",
+    "sort_order": "{{parameters.querySortOrder}}",
+    "status": "{{parameters.queryStatus}}",
+    "assigned_user_id": "{{parameters.queryAssignedUserId}}",
+    "person_id": "{{parameters.queryPersonId}}",
+    "person_email": "{{parameters.queryPersonEmail}}",
+    "limit": "{{min(parameters.limit, 100)}}"
+  }
+}

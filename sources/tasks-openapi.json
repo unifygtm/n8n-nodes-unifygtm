@@ -1,0 +1,3806 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Unify Tasks API",
+    "summary": "List and manage tasks within the Unify platform.",
+    "version": "1",
+    "termsOfService": "https://www.unifygtm.com/legal/terms-and-conditions",
+    "contact": {
+      "name": "Unify Support",
+      "url": "https://www.unifygtm.com/support",
+      "email": "support@unifygtm.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Tasks"
+    }
+  ],
+  "paths": {
+    "/tasks/v1/tasks": {
+      "get": {
+        "operationId": "list_tasks",
+        "description": "List tasks. Use an asynchronous query job for bulk exports.",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor returned by the previous page. Pass it unchanged with the\nsame filters and sort order.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "explode": false
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "description": "Field to sort by. Defaults to `created_at`. Tasks with the same value\nare sorted by `id`.",
+            "schema": {
+              "$ref": "#/components/schemas/TaskSortField"
+            },
+            "explode": false
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "description": "Sort direction. Defaults to descending.",
+            "schema": {
+              "$ref": "#/components/schemas/SortOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filter tasks by status.",
+            "schema": {
+              "$ref": "#/components/schemas/TaskStatus"
+            },
+            "explode": false
+          },
+          {
+            "name": "assigned_user_id",
+            "in": "query",
+            "required": false,
+            "description": "Filter tasks by assignee.",
+            "schema": {
+              "$ref": "#/components/schemas/uuid"
+            },
+            "explode": false
+          },
+          {
+            "name": "person_id",
+            "in": "query",
+            "required": false,
+            "description": "Filter tasks by person.",
+            "schema": {
+              "$ref": "#/components/schemas/uuid"
+            },
+            "explode": false
+          },
+          {
+            "name": "person_email",
+            "in": "query",
+            "required": false,
+            "description": "Filter tasks by the person's exact email address. Cannot be combined with\n`person_id`. Email matching is case-insensitive.",
+            "schema": {
+              "$ref": "#/components/schemas/email"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTasksResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      "post": {
+        "operationId": "create_task",
+        "description": "Create a task for a person.",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTaskResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response for any operation that results in a not found error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_found"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a not found error."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response for any operation that results in a conflict error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "conflict"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a conflict error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskRequest"
+              }
+            }
+          }
+        },
+        "x-mcp-tool": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        }
+      }
+    },
+    "/tasks/v1/tasks/query-jobs": {
+      "post": {
+        "operationId": "create_task_query_job",
+        "description": "Start an asynchronous query job to export tasks. Poll the job until it is\n`FINISHED`, then page through the results.",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Response returned when creating a query job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBulkApiTasksJobRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "list_task_query_jobs",
+        "description": "List task query jobs.",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor returned by the previous page.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "explode": false
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filter jobs by status.",
+            "schema": {
+              "$ref": "#/components/schemas/BulkApiJobStatus"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when listing query jobs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBulkApiJobsSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      }
+    },
+    "/tasks/v1/tasks/query-jobs/{job_id}": {
+      "get": {
+        "operationId": "get_task_query_job",
+        "description": "Get a query job's status. Results are available when the job is\n`FINISHED`.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when fetching a query job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a query job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      }
+    },
+    "/tasks/v1/tasks/query-jobs/{job_id}/cancel": {
+      "post": {
+        "operationId": "cancel_task_query_job",
+        "description": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when canceling a query job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a query job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response returned when a query job is not cancelable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelBulkApiJobNotCancelableResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      }
+    },
+    "/tasks/v1/tasks/query-jobs/{job_id}/results": {
+      "get": {
+        "operationId": "get_task_query_job_results",
+        "description": "Get query job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "explode": false
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response returned when fetching completed query job results.",
+            "headers": {
+              "x-total": {
+                "required": false,
+                "description": "Total result count. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-page": {
+                "required": false,
+                "description": "Result page number. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-page-size": {
+                "required": false,
+                "description": "Result page size. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "total",
+                    "page",
+                    "page_size",
+                    "data"
+                  ],
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TaskQueryJobResult"
+                      }
+                    }
+                  },
+                  "description": "Successful response returned when fetching completed query job results."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a query job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response returned when query job results are not ready yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsNotReadyResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsFailedResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsCanceledResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Response returned when query job results have expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobResultsExpiredResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Response returned when a requested query job results page is too large.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobResultsPayloadTooLargeResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ]
+      }
+    },
+    "/tasks/v1/tasks/{id}": {
+      "get": {
+        "operationId": "retrieve_task",
+        "description": "Get a single task by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetrieveTaskResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response for any operation that results in a not found error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_found"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a not found error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      "patch": {
+        "operationId": "update_task",
+        "description": "Update a task by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTaskResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response for any operation that results in a not found error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_found"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a not found error."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response for any operation that results in a conflict error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "conflict"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a conflict error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaskRequest"
+              }
+            }
+          }
+        },
+        "x-mcp-tool": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      "delete": {
+        "operationId": "delete_task",
+        "description": "Delete a task by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTaskResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response for any operation that results in a not found error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_found"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a not found error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      }
+    },
+    "/tasks/v1/tasks/{id}/complete": {
+      "post": {
+        "operationId": "complete_task",
+        "description": "Mark a task as completed.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response for any operation that results in a not found error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_found"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a not found error."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response for any operation that results in a conflict error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "conflict"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a conflict error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "components": {
+    "schemas": {
+      "BaseCreateTaskRequest": {
+        "type": "object",
+        "required": [
+          "person_id"
+        ],
+        "properties": {
+          "person_id": {
+            "$ref": "#/components/schemas/uuid"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/TaskPriority"
+          },
+          "due_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "BulkApiDatetimeRangeFilter": {
+        "type": "object",
+        "properties": {
+          "gt": {
+            "type": "string",
+            "description": "Exclusive lower bound. Cannot be combined with `gte`."
+          },
+          "gte": {
+            "type": "string",
+            "description": "Inclusive lower bound. Cannot be combined with `gt`."
+          },
+          "lt": {
+            "type": "string",
+            "description": "Exclusive upper bound. Cannot be combined with `lte`."
+          },
+          "lte": {
+            "type": "string",
+            "description": "Inclusive upper bound. Cannot be combined with `lt`."
+          }
+        },
+        "description": "Filter by a datetime range. At least one bound is required."
+      },
+      "BulkApiJob": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "status",
+          "total_rows",
+          "error_code",
+          "created_at",
+          "expires_at",
+          "canceled_at"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/BulkApiJobStatus"
+          },
+          "total_rows": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BulkApiJobErrorCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "Time the job and its results expire, 24 hours after creation."
+          },
+          "canceled_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "query job representation."
+      },
+      "BulkApiJobErrorCode": {
+        "type": "string",
+        "enum": [
+          "INTERNAL_ERROR",
+          "QUERY_TIMEOUT",
+          "RESOURCE_EXHAUSTED"
+        ],
+        "description": "Terminal failure classification for a query job."
+      },
+      "BulkApiJobStatus": {
+        "type": "string",
+        "enum": [
+          "IN_PROGRESS",
+          "FINISHED",
+          "FAILED",
+          "EXPIRED",
+          "CANCELED"
+        ],
+        "description": "Status of an asynchronous query job."
+      },
+      "BulkApiUuidFilter": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "description": "Filter matching a resource by ID."
+      },
+      "CancelBulkApiJobNotCancelableResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "job_not_cancelable"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when a query job is not cancelable."
+      },
+      "CancelBulkApiJobSuccessResponse": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "status"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CANCELED"
+            ]
+          }
+        },
+        "description": "Response returned when canceling a query job."
+      },
+      "CreateActionItemTaskRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "ACTION_ITEM"
+                ]
+              },
+              "note_content": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseCreateTaskRequest"
+              }
+            ]
+          }
+        ]
+      },
+      "CreateBulkApiJobSuccessResponse": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "status",
+          "expires_at"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "IN_PROGRESS"
+            ]
+          },
+          "expires_at": {
+            "type": "string",
+            "description": "Time the job and its results expire, 24 hours after creation."
+          }
+        },
+        "description": "Response returned when creating a query job."
+      },
+      "CreateBulkApiTasksJobFilter": {
+        "type": "object",
+        "properties": {
+          "updated_at": {
+            "$ref": "#/components/schemas/BulkApiDatetimeRangeFilter",
+            "description": "Filter by the latest task update, including changes to note content."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/BulkApiDatetimeRangeFilter"
+          },
+          "due_at": {
+            "$ref": "#/components/schemas/BulkApiDatetimeRangeFilter"
+          },
+          "ended_at": {
+            "$ref": "#/components/schemas/BulkApiDatetimeRangeFilter"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values included in a set."
+              },
+              {
+                "type": "object",
+                "required": [
+                  "not_in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values excluded from a set."
+              }
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskStatus"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskStatus"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values included in a set."
+              },
+              {
+                "type": "object",
+                "required": [
+                  "not_in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskStatus"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskStatus"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values excluded from a set."
+              }
+            ]
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskType"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskType"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values included in a set."
+              },
+              {
+                "type": "object",
+                "required": [
+                  "not_in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskType"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskType"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values excluded from a set."
+              }
+            ]
+          },
+          "priority": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskPriority"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskPriority"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values included in a set."
+              },
+              {
+                "type": "object",
+                "required": [
+                  "not_in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskPriority"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TaskPriority"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values excluded from a set."
+              }
+            ]
+          },
+          "assigned_user": {
+            "$ref": "#/components/schemas/BulkApiUuidFilter"
+          },
+          "person": {
+            "$ref": "#/components/schemas/BulkApiUuidFilter"
+          },
+          "company": {
+            "$ref": "#/components/schemas/BulkApiUuidFilter"
+          }
+        },
+        "description": "Filters accepted when querying tasks."
+      },
+      "CreateBulkApiTasksJobRequest": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/CreateBulkApiTasksJobFilter",
+            "description": "Filters that select the tasks to export. Omit to export all tasks."
+          }
+        },
+        "description": "Request body for creating a tasks query job."
+      },
+      "CreateEmailTaskRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "mailbox_email",
+          "subject",
+          "content"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "EMAIL"
+            ]
+          },
+          "mailbox_email": {
+            "$ref": "#/components/schemas/email",
+            "description": "Email address of the mailbox used to send the email when the task is\ncompleted."
+          },
+          "subject": {
+            "type": "string",
+            "description": "Email subject. May be empty while the task is a draft."
+          },
+          "content": {
+            "type": "string",
+            "description": "Email body. May be empty while the task is a draft."
+          },
+          "cc_recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/email"
+            },
+            "description": "Additional email recipients. The task's person is the primary recipient."
+          },
+          "bcc_recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/email"
+            },
+            "description": "Blind-copy email recipients."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseCreateTaskRequest"
+          }
+        ]
+      },
+      "CreateLinkedinSendConnectionRequestTaskRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "LINKEDIN_SEND_CONNECTION_REQUEST"
+                ]
+              },
+              "note_content": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseCreateTaskRequest"
+              }
+            ]
+          }
+        ]
+      },
+      "CreateLinkedinSendMessageTaskRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "LINKEDIN_SEND_MESSAGE"
+                ]
+              },
+              "note_content": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseCreateTaskRequest"
+              }
+            ]
+          }
+        ]
+      },
+      "CreateLinkedinViewProfileTaskRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "LINKEDIN_VIEW_PROFILE"
+                ]
+              },
+              "note_content": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseCreateTaskRequest"
+              }
+            ]
+          }
+        ]
+      },
+      "CreatePhoneCallTaskRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "PHONE_CALL"
+                ]
+              },
+              "note_content": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseCreateTaskRequest"
+              }
+            ]
+          }
+        ]
+      },
+      "CreateTaskRequest": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CreateEmailTaskRequest"
+          },
+          {
+            "$ref": "#/components/schemas/CreateActionItemTaskRequest"
+          },
+          {
+            "$ref": "#/components/schemas/CreatePhoneCallTaskRequest"
+          },
+          {
+            "$ref": "#/components/schemas/CreateLinkedinSendMessageTaskRequest"
+          },
+          {
+            "$ref": "#/components/schemas/CreateLinkedinSendConnectionRequestTaskRequest"
+          },
+          {
+            "$ref": "#/components/schemas/CreateLinkedinViewProfileTaskRequest"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "EMAIL": "#/components/schemas/CreateEmailTaskRequest",
+            "ACTION_ITEM": "#/components/schemas/CreateActionItemTaskRequest",
+            "PHONE_CALL": "#/components/schemas/CreatePhoneCallTaskRequest",
+            "LINKEDIN_SEND_MESSAGE": "#/components/schemas/CreateLinkedinSendMessageTaskRequest",
+            "LINKEDIN_SEND_CONNECTION_REQUEST": "#/components/schemas/CreateLinkedinSendConnectionRequestTaskRequest",
+            "LINKEDIN_VIEW_PROFILE": "#/components/schemas/CreateLinkedinViewProfileTaskRequest"
+          }
+        }
+      },
+      "CreateTaskResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "data"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "success"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/Task"
+              }
+            },
+            "description": "Response for a successful create operation."
+          }
+        ]
+      },
+      "DeleteTaskResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "success"
+                ]
+              }
+            },
+            "description": "Response for a successful delete operation."
+          }
+        ]
+      },
+      "GetBulkApiJobNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when a query job cannot be found."
+      },
+      "GetBulkApiJobResultsCanceledResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "results_canceled"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when a query job was canceled and has no results."
+      },
+      "GetBulkApiJobResultsExpiredResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "results_expired"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Response returned when query job results have expired."
+      },
+      "GetBulkApiJobResultsFailedResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "results_failed"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when a query job failed and has no results."
+      },
+      "GetBulkApiJobResultsNotReadyResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "results_not_ready"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when query job results are not ready yet."
+      },
+      "GetBulkApiJobResultsPayloadTooLargeResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "results_page_too_large"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Response returned when a requested query job results page is too large."
+      },
+      "GetBulkApiJobSuccessResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BulkApiJob"
+          }
+        ],
+        "description": "Response returned when fetching a query job."
+      },
+      "ListBulkApiJobsSuccessResponse": {
+        "type": "object",
+        "required": [
+          "jobs",
+          "next_cursor"
+        ],
+        "properties": {
+          "jobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkApiJob"
+            }
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "Response returned when listing query jobs."
+      },
+      "ListTasksResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "data",
+          "next_cursor"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Opaque cursor for the next page, or null when there are no more tasks."
+          }
+        }
+      },
+      "RetrieveTaskResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "data"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "success"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/Task"
+              }
+            },
+            "description": "Response for a successful get operation."
+          }
+        ]
+      },
+      "SortOrder": {
+        "type": "string",
+        "enum": [
+          "asc",
+          "desc"
+        ]
+      },
+      "Task": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "status",
+          "priority",
+          "person_id",
+          "assigned_user_id",
+          "due_at",
+          "ended_at",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/uuid"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TaskType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TaskStatus"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/TaskPriority"
+          },
+          "person_id": {
+            "$ref": "#/components/schemas/uuid"
+          },
+          "assigned_user_id": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "due_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "note_content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Note content for tasks that support notes. This is null until the note is ready and is omitted for email tasks."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TaskPriority": {
+        "type": "string",
+        "enum": [
+          "LOW",
+          "MEDIUM",
+          "HIGH",
+          "URGENT"
+        ]
+      },
+      "TaskQueryJobResult": {
+        "type": "object",
+        "required": [
+          "note_content",
+          "updated_at"
+        ],
+        "properties": {
+          "note_content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "status",
+              "priority",
+              "person_id",
+              "assigned_user_id",
+              "due_at",
+              "ended_at",
+              "created_at"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/uuid"
+              },
+              "type": {
+                "$ref": "#/components/schemas/TaskType"
+              },
+              "status": {
+                "$ref": "#/components/schemas/TaskStatus"
+              },
+              "priority": {
+                "$ref": "#/components/schemas/TaskPriority"
+              },
+              "person_id": {
+                "$ref": "#/components/schemas/uuid"
+              },
+              "assigned_user_id": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "due_at": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "ended_at": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "description": "The template for omitting properties."
+          }
+        ],
+        "description": "A task returned by task query jobs."
+      },
+      "TaskSortField": {
+        "type": "string",
+        "enum": [
+          "created_at"
+        ]
+      },
+      "TaskStatus": {
+        "type": "string",
+        "enum": [
+          "NOT_READY",
+          "READY",
+          "COMPLETED",
+          "SKIPPED",
+          "CANCELED"
+        ]
+      },
+      "TaskType": {
+        "type": "string",
+        "enum": [
+          "EMAIL",
+          "ACTION_ITEM",
+          "PHONE_CALL",
+          "LINKEDIN_SEND_MESSAGE",
+          "LINKEDIN_SEND_CONNECTION_REQUEST",
+          "LINKEDIN_VIEW_PROFILE",
+          "REPLY_TO_EMAIL"
+        ]
+      },
+      "UResponses.BadRequestError": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "path": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "object_api_name": {
+            "type": "string"
+          },
+          "attribute_api_name": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {}
+          }
+        ],
+        "description": "Validation error detail returned for bad request responses."
+      },
+      "UnifyApi.Data.CreateBulkApiObjectRecordsJobObjectNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when the object being queried cannot be found."
+      },
+      "UnifyApi.Sequences.ConcurrentEnrollment": {
+        "type": "object",
+        "required": [
+          "sequence_id",
+          "enrollment_id",
+          "status",
+          "policy"
+        ],
+        "properties": {
+          "sequence_id": {
+            "$ref": "#/components/schemas/UnifyApi.Sequences.uuid"
+          },
+          "enrollment_id": {
+            "$ref": "#/components/schemas/UnifyApi.Sequences.uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/UnifyApi.Sequences.SequenceEnrollmentStatus"
+          },
+          "policy": {
+            "$ref": "#/components/schemas/UnifyApi.Sequences.ConcurrentEnrollmentPolicy"
+          }
+        }
+      },
+      "UnifyApi.Sequences.ConcurrentEnrollmentConflictReason": {
+        "type": "string",
+        "enum": [
+          "MANUAL_APPROVAL_REQUIRED",
+          "BLOCKED_BY_DISALLOWED_POLICY",
+          "UNAPPROVED_CONCURRENT_SEQUENCES",
+          "ACTIVE_ENROLLMENT_LIMIT_REACHED"
+        ]
+      },
+      "UnifyApi.Sequences.ConcurrentEnrollmentPolicy": {
+        "type": "string",
+        "enum": [
+          "ALLOWED",
+          "MANUAL_ONLY",
+          "DISALLOWED"
+        ]
+      },
+      "UnifyApi.Sequences.CreateEnrollmentConflictResponse": {
+        "type": "object",
+        "required": [
+          "active_sequence_id",
+          "active_enrollment_id",
+          "reason",
+          "active_enrollments"
+        ],
+        "properties": {
+          "active_sequence_id": {
+            "$ref": "#/components/schemas/UnifyApi.Sequences.uuid",
+            "description": "ID of the first active sequence. Retained for backward compatibility."
+          },
+          "active_enrollment_id": {
+            "$ref": "#/components/schemas/UnifyApi.Sequences.uuid",
+            "description": "ID of the first active enrollment. Retained for backward compatibility."
+          },
+          "reason": {
+            "$ref": "#/components/schemas/UnifyApi.Sequences.ConcurrentEnrollmentConflictReason"
+          },
+          "active_enrollments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnifyApi.Sequences.ConcurrentEnrollment"
+            }
+          },
+          "blocking_sequence_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnifyApi.Sequences.uuid"
+            }
+          },
+          "unapproved_sequence_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnifyApi.Sequences.uuid"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "conflict"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when active enrollments prevent a new enrollment."
+      },
+      "UnifyApi.Sequences.EnrollmentNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when an enrollment cannot be found."
+      },
+      "UnifyApi.Sequences.SequenceEnrollmentStatus": {
+        "type": "string",
+        "enum": [
+          "DRAFT",
+          "IN_PROGRESS",
+          "FINISHED"
+        ],
+        "description": "Status of a sequence enrollment."
+      },
+      "UnifyApi.Sequences.SequenceNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when a sequence cannot be found."
+      },
+      "UnifyApi.Sequences.SequenceStepNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when a sequence step cannot be found."
+      },
+      "UnifyApi.Sequences.uuid": {
+        "type": "string",
+        "format": "uuid",
+        "description": "String UUID value."
+      },
+      "UpdateTaskRequest": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "assigned_user_id": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "priority": {
+                "$ref": "#/components/schemas/TaskPriority"
+              },
+              "due_at": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "assigned_user_id"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "assigned_user_id": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "priority": {
+                "$ref": "#/components/schemas/TaskPriority"
+              },
+              "due_at": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "priority"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "assigned_user_id": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "priority": {
+                "$ref": "#/components/schemas/TaskPriority"
+              },
+              "due_at": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "due_at"
+            ]
+          }
+        ],
+        "description": "Request body for updating a task. At least one of `assigned_user_id`,\n`priority`, or `due_at` must be provided."
+      },
+      "UpdateTaskResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "data"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "success"
+                ]
+              },
+              "data": {
+                "$ref": "#/components/schemas/Task"
+              }
+            },
+            "description": "Response for a successful update operation."
+          }
+        ]
+      },
+      "email": {
+        "type": "string",
+        "format": "email"
+      },
+      "uuid": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.unifygtm.com",
+      "variables": {}
+    }
+  ]
+}

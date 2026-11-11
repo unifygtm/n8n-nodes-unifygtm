@@ -1,0 +1,9 @@
+{
+  "name": "get_sequence_enrollment_query_job_results",
+  "label": "Get Sequence Enrollment Query Job Results",
+  "type": "search",
+  "connection": "api-key",
+  "description": "Get Sequence Enrollment Query Job Results in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments/query-jobs/{job_id}/results"
+}

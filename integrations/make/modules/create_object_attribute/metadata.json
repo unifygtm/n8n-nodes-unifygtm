@@ -1,0 +1,9 @@
+{
+  "name": "create_object_attribute",
+  "label": "Create Object Attribute",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Create Object Attribute in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/attributes"
+}

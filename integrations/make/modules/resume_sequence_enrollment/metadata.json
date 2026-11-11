@@ -1,0 +1,9 @@
+{
+  "name": "resume_sequence_enrollment",
+  "label": "Resume Sequence Enrollment",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Resume Sequence Enrollment in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments/{id}/resume"
+}

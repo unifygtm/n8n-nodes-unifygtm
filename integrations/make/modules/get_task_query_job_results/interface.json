@@ -1,0 +1,12 @@
+[
+  {
+    "name": "note_content",
+    "label": "Note Content",
+    "type": "text"
+  },
+  {
+    "name": "updated_at",
+    "label": "Updated At",
+    "type": "text"
+  }
+]

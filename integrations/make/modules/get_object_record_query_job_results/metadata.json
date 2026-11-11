@@ -1,0 +1,9 @@
+{
+  "name": "get_object_record_query_job_results",
+  "label": "Get Object Record Query Job Results",
+  "type": "search",
+  "connection": "api-key",
+  "description": "Get Object Record Query Job Results in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/query-jobs/{job_id}/results"
+}

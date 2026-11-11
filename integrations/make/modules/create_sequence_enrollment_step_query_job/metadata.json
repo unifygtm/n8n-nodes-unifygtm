@@ -1,0 +1,9 @@
+{
+  "name": "create_sequence_enrollment_step_query_job",
+  "label": "Create Sequence Enrollment Step Query Job",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Create Sequence Enrollment Step Query Job in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollment-steps/query-jobs"
+}

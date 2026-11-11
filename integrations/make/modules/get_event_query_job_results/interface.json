@@ -1,0 +1,391 @@
+[
+  {
+    "name": "id",
+    "label": "Id",
+    "type": "text"
+  },
+  {
+    "name": "original_event_id",
+    "label": "Original Event ID",
+    "type": "text"
+  },
+  {
+    "name": "timestamp",
+    "label": "Timestamp",
+    "type": "text"
+  },
+  {
+    "name": "type",
+    "label": "Type",
+    "type": "text"
+  },
+  {
+    "name": "name",
+    "label": "Name",
+    "type": "text"
+  },
+  {
+    "name": "properties",
+    "label": "Properties",
+    "type": "any"
+  },
+  {
+    "name": "anonymous_id",
+    "label": "Anonymous ID",
+    "type": "text"
+  },
+  {
+    "name": "session_id",
+    "label": "Session ID",
+    "type": "text"
+  },
+  {
+    "name": "company",
+    "label": "Company",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "object",
+        "label": "Object",
+        "type": "text"
+      },
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "created_at",
+        "label": "Created At",
+        "type": "text"
+      },
+      {
+        "name": "updated_at",
+        "label": "Updated At",
+        "type": "text"
+      },
+      {
+        "name": "attributes",
+        "label": "Attributes",
+        "type": "collection",
+        "spec": [
+          {
+            "name": "address",
+            "label": "Address",
+            "type": "collection",
+            "spec": [
+              {
+                "name": "country",
+                "label": "Country",
+                "type": "any"
+              },
+              {
+                "name": "administrative_area",
+                "label": "Administrative Area",
+                "type": "text"
+              },
+              {
+                "name": "sub_administrative_area",
+                "label": "Sub Administrative Area",
+                "type": "text"
+              },
+              {
+                "name": "locality",
+                "label": "Locality",
+                "type": "text"
+              },
+              {
+                "name": "dependent_locality",
+                "label": "Dependent Locality",
+                "type": "text"
+              },
+              {
+                "name": "postal_code",
+                "label": "Postal Code",
+                "type": "text"
+              },
+              {
+                "name": "thoroughfare",
+                "label": "Thoroughfare",
+                "type": "text"
+              },
+              {
+                "name": "premise",
+                "label": "Premise",
+                "type": "text"
+              },
+              {
+                "name": "sub_premise",
+                "label": "Sub Premise",
+                "type": "text"
+              },
+              {
+                "name": "time_zone",
+                "label": "Time Zone",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "name": "corporate_phone",
+            "label": "Corporate Phone",
+            "type": "text"
+          },
+          {
+            "name": "description",
+            "label": "Description",
+            "type": "text"
+          },
+          {
+            "name": "do_not_contact",
+            "label": "Do Not Contact",
+            "type": "boolean"
+          },
+          {
+            "name": "domain",
+            "label": "Domain",
+            "type": "text"
+          },
+          {
+            "name": "employee_count",
+            "label": "Employee Count",
+            "type": "number"
+          },
+          {
+            "name": "founded",
+            "label": "Founded",
+            "type": "text"
+          },
+          {
+            "name": "industry",
+            "label": "Industry",
+            "type": "text"
+          },
+          {
+            "name": "last_activity_at",
+            "label": "Last Activity At",
+            "type": "text"
+          },
+          {
+            "name": "lead_source",
+            "label": "Lead Source",
+            "type": "text"
+          },
+          {
+            "name": "linkedin_url",
+            "label": "Linkedin Url",
+            "type": "text"
+          },
+          {
+            "name": "name",
+            "label": "Name",
+            "type": "text"
+          },
+          {
+            "name": "record_owner",
+            "label": "Record Owner",
+            "type": "any"
+          },
+          {
+            "name": "revenue",
+            "label": "Revenue",
+            "type": "collection",
+            "spec": [
+              {
+                "name": "code",
+                "label": "Code",
+                "type": "text"
+              },
+              {
+                "name": "value",
+                "label": "Value",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "person",
+    "label": "Person",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "object",
+        "label": "Object",
+        "type": "text"
+      },
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "created_at",
+        "label": "Created At",
+        "type": "text"
+      },
+      {
+        "name": "updated_at",
+        "label": "Updated At",
+        "type": "text"
+      },
+      {
+        "name": "attributes",
+        "label": "Attributes",
+        "type": "collection",
+        "spec": [
+          {
+            "name": "address",
+            "label": "Address",
+            "type": "collection",
+            "spec": [
+              {
+                "name": "country",
+                "label": "Country",
+                "type": "any"
+              },
+              {
+                "name": "administrative_area",
+                "label": "Administrative Area",
+                "type": "text"
+              },
+              {
+                "name": "sub_administrative_area",
+                "label": "Sub Administrative Area",
+                "type": "text"
+              },
+              {
+                "name": "locality",
+                "label": "Locality",
+                "type": "text"
+              },
+              {
+                "name": "dependent_locality",
+                "label": "Dependent Locality",
+                "type": "text"
+              },
+              {
+                "name": "postal_code",
+                "label": "Postal Code",
+                "type": "text"
+              },
+              {
+                "name": "thoroughfare",
+                "label": "Thoroughfare",
+                "type": "text"
+              },
+              {
+                "name": "premise",
+                "label": "Premise",
+                "type": "text"
+              },
+              {
+                "name": "sub_premise",
+                "label": "Sub Premise",
+                "type": "text"
+              },
+              {
+                "name": "time_zone",
+                "label": "Time Zone",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "name": "company",
+            "label": "Company",
+            "type": "any"
+          },
+          {
+            "name": "corporate_phone",
+            "label": "Corporate Phone",
+            "type": "text"
+          },
+          {
+            "name": "do_not_call",
+            "label": "Do Not Call",
+            "type": "boolean"
+          },
+          {
+            "name": "do_not_email",
+            "label": "Do Not Email",
+            "type": "boolean"
+          },
+          {
+            "name": "email",
+            "label": "Email",
+            "type": "text"
+          },
+          {
+            "name": "email_opt_out",
+            "label": "Email Opt Out",
+            "type": "boolean"
+          },
+          {
+            "name": "eu_resident",
+            "label": "Eu Resident",
+            "type": "boolean"
+          },
+          {
+            "name": "first_name",
+            "label": "First Name",
+            "type": "text"
+          },
+          {
+            "name": "last_activity_at",
+            "label": "Last Activity At",
+            "type": "text"
+          },
+          {
+            "name": "last_name",
+            "label": "Last Name",
+            "type": "text"
+          },
+          {
+            "name": "lead_source",
+            "label": "Lead Source",
+            "type": "text"
+          },
+          {
+            "name": "linkedin_url",
+            "label": "Linkedin Url",
+            "type": "text"
+          },
+          {
+            "name": "mobile_phone",
+            "label": "Mobile Phone",
+            "type": "text"
+          },
+          {
+            "name": "record_owner",
+            "label": "Record Owner",
+            "type": "any"
+          },
+          {
+            "name": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "name": "title",
+            "label": "Title",
+            "type": "text"
+          },
+          {
+            "name": "work_phone",
+            "label": "Work Phone",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+]

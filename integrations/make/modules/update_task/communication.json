@@ -1,0 +1,11 @@
+{
+  "url": "/tasks/v1/tasks/{{encodeURL(parameters.pathId)}}",
+  "method": "PATCH",
+  "encodeUrl": false,
+  "body": "{{parseJSON(ifempty(parameters.requestBody, '{}'))}}",
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

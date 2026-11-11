@@ -1,0 +1,9 @@
+{
+  "name": "get_sequence_enrollment",
+  "label": "Get Sequence Enrollment",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Get Sequence Enrollment in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments/{id}"
+}

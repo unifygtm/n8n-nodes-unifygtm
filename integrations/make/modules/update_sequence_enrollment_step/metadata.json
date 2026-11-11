@@ -1,0 +1,9 @@
+{
+  "name": "update_sequence_enrollment_step",
+  "label": "Update Sequence Enrollment Step",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Update Sequence Enrollment Step in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollment-steps/{id}"
+}

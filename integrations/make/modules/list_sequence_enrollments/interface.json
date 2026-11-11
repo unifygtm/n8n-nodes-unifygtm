@@ -1,0 +1,187 @@
+[
+  {
+    "name": "id",
+    "label": "Id",
+    "type": "text"
+  },
+  {
+    "name": "created_at",
+    "label": "Created At",
+    "type": "text"
+  },
+  {
+    "name": "updated_at",
+    "label": "Updated At",
+    "type": "text"
+  },
+  {
+    "name": "sequence",
+    "label": "Sequence",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text"
+      },
+      {
+        "name": "is_paused",
+        "label": "Is Paused",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "name": "person",
+    "label": "Person",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "text"
+      },
+      {
+        "name": "first_name",
+        "label": "First Name",
+        "type": "text"
+      },
+      {
+        "name": "last_name",
+        "label": "Last Name",
+        "type": "text"
+      },
+      {
+        "name": "linkedin_url",
+        "label": "Linkedin Url",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "mailbox",
+    "label": "Mailbox",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "text"
+      },
+      {
+        "name": "display_name",
+        "label": "Display Name",
+        "type": "text"
+      },
+      {
+        "name": "is_paused",
+        "label": "Is Paused",
+        "type": "boolean"
+      },
+      {
+        "name": "is_unauthorized",
+        "label": "Is Unauthorized",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "name": "enrolled_by_play",
+    "label": "Enrolled By Play",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "reply_email_message",
+    "label": "Reply Email Message",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "received_at",
+        "label": "Received At",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "is_draft_approval_pending",
+    "label": "Is Draft Approval Pending",
+    "type": "boolean"
+  },
+  {
+    "name": "is_blocked",
+    "label": "Is Blocked",
+    "type": "boolean"
+  },
+  {
+    "name": "is_bounced",
+    "label": "Is Bounced",
+    "type": "boolean"
+  },
+  {
+    "name": "is_canceled",
+    "label": "Is Canceled",
+    "type": "boolean"
+  },
+  {
+    "name": "is_excluded",
+    "label": "Is Excluded",
+    "type": "boolean"
+  },
+  {
+    "name": "is_opted_out",
+    "label": "Is Opted Out",
+    "type": "boolean"
+  },
+  {
+    "name": "is_paused",
+    "label": "Is Paused",
+    "type": "boolean"
+  },
+  {
+    "name": "is_replied",
+    "label": "Is Replied",
+    "type": "boolean"
+  },
+  {
+    "name": "started_at",
+    "label": "Started At",
+    "type": "text"
+  },
+  {
+    "name": "ended_at",
+    "label": "Ended At",
+    "type": "text"
+  }
+]

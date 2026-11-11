@@ -1,0 +1,9 @@
+{
+  "name": "delete_object",
+  "label": "Delete Object",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Delete Object in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}"
+}

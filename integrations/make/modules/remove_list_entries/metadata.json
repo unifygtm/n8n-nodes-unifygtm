@@ -1,0 +1,9 @@
+{
+  "name": "remove_list_entries",
+  "label": "Remove List Entries",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Remove List Entries in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists/{list_id}/entries/remove"
+}

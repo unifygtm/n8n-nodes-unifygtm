@@ -1,0 +1,20 @@
+{
+  "url": "/data/v1/events/query-jobs/{{encodeURL(parameters.pathJobId)}}/results",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.data}}",
+    "output": "{{item}}",
+    "limit": "{{parameters.limit}}"
+  },
+  "pagination": {
+    "qs": {
+      "page": "{{body.page + 1}}"
+    },
+    "condition": "{{body.page * body.page_size < body.total}}"
+  },
+  "qs": {
+    "page": "{{parameters.queryPage}}",
+    "page_size": "{{min(parameters.limit, 100)}}"
+  }
+}

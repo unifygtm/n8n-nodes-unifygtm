@@ -1,0 +1,17 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the object.",
+    "advanced": false
+  },
+  {
+    "name": "requestBody",
+    "label": "Request Body (JSON)",
+    "type": "text",
+    "required": true,
+    "help": "Enter the complete JSON request body for create_object_attribute. Preserve JSON types. See docs/operation-contracts.json and the Unify API reference."
+  }
+]

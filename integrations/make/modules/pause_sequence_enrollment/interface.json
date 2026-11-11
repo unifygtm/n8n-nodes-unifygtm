@@ -1,0 +1,12 @@
+[
+  {
+    "name": "id",
+    "label": "Id",
+    "type": "text"
+  },
+  {
+    "name": "is_paused",
+    "label": "Is Paused",
+    "type": "boolean"
+  }
+]

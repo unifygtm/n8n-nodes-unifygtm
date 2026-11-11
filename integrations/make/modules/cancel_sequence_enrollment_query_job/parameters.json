@@ -1,0 +1,10 @@
+[
+  {
+    "name": "pathJobId",
+    "label": "Job ID",
+    "type": "text",
+    "required": true,
+    "help": "",
+    "advanced": false
+  }
+]

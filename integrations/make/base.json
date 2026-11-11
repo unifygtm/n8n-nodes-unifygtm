@@ -1,0 +1,21 @@
+{
+  "baseUrl": "https://api.unifygtm.com",
+  "headers": {
+    "X-Api-Key": "{{connection.apiKey}}",
+    "Accept": "application/json"
+  },
+  "type": "json",
+  "followRedirect": false,
+  "followAllRedirect": false,
+  "log": {
+    "sanitize": [
+      "request.headers.`X-Api-Key`",
+      "request.headers.`x-api-key`"
+    ]
+  },
+  "response": {
+    "error": {
+      "message": "Unify request failed (HTTP {{statusCode}}). Check the operation parameters, permissions and API documentation."
+    }
+  }
+}

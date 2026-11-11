@@ -1,0 +1,10 @@
+{
+  "url": "/sequences/v1/sequences/{{encodeURL(parameters.pathId)}}",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

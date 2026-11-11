@@ -1,0 +1,9 @@
+{
+  "url": "/data/v1/objects",
+  "method": "POST",
+  "encodeUrl": false,
+  "body": "{{parseJSON(ifempty(parameters.requestBody, '{}'))}}",
+  "response": {
+    "output": "{{body}}"
+  }
+}

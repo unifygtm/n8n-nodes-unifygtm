@@ -1,0 +1,9 @@
+{
+  "url": "/data/v1/lists/{{encodeURL(parameters.pathListId)}}/entries/remove",
+  "method": "POST",
+  "encodeUrl": false,
+  "body": "{{parseJSON(ifempty(parameters.requestBody, '{}'))}}",
+  "response": {
+    "output": "{{body}}"
+  }
+}

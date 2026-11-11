@@ -1,0 +1,14 @@
+import type { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { NodeConnectionTypes } from 'n8n-workflow';
+import { buildProperties } from '../shared/properties';
+import { executeOperations } from '../shared/execute';
+
+export class UnifyAnalytics implements INodeType {
+ description: INodeTypeDescription = {
+  displayName:'Unify Analytics',name:'unifyAnalytics',icon:'file:unify.svg',group:['transform'],version:1,
+  subtitle:'={{$parameter["operation"]}}',description:'Send identify, page and track events to Unify',
+  defaults:{name:'Unify Analytics'},inputs:[NodeConnectionTypes.Main],outputs:[NodeConnectionTypes.Main],
+  usableAsTool:true,credentials:[{name:'unifyAnalyticsApi',required:true}],properties:buildProperties(true),
+ };
+ async execute(this:IExecuteFunctions):Promise<INodeExecutionData[][]> { return executeOperations(this,true); }
+}

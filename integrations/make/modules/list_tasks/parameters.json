@@ -1,0 +1,108 @@
+[
+  {
+    "name": "queryCursor",
+    "label": "Cursor",
+    "type": "text",
+    "required": false,
+    "help": "Opaque cursor returned by the previous page. Pass it unchanged with the same filters and sort order.",
+    "advanced": true
+  },
+  {
+    "name": "querySortBy",
+    "label": "Sort By",
+    "type": "select",
+    "required": false,
+    "help": "Field to sort by. Defaults to `created_at`. Tasks with the same value are sorted by `id`.",
+    "advanced": true,
+    "options": [
+      {
+        "label": "created_at",
+        "value": "created_at"
+      }
+    ]
+  },
+  {
+    "name": "querySortOrder",
+    "label": "Sort Order",
+    "type": "select",
+    "required": false,
+    "help": "Sort direction. Defaults to descending.",
+    "advanced": true,
+    "options": [
+      {
+        "label": "asc",
+        "value": "asc"
+      },
+      {
+        "label": "desc",
+        "value": "desc"
+      }
+    ]
+  },
+  {
+    "name": "queryStatus",
+    "label": "Status",
+    "type": "select",
+    "required": false,
+    "help": "Filter tasks by status.",
+    "advanced": true,
+    "options": [
+      {
+        "label": "NOT_READY",
+        "value": "NOT_READY"
+      },
+      {
+        "label": "READY",
+        "value": "READY"
+      },
+      {
+        "label": "COMPLETED",
+        "value": "COMPLETED"
+      },
+      {
+        "label": "SKIPPED",
+        "value": "SKIPPED"
+      },
+      {
+        "label": "CANCELED",
+        "value": "CANCELED"
+      }
+    ]
+  },
+  {
+    "name": "queryAssignedUserId",
+    "label": "Assigned User ID",
+    "type": "text",
+    "required": false,
+    "help": "Filter tasks by assignee.",
+    "advanced": true
+  },
+  {
+    "name": "queryPersonId",
+    "label": "Person ID",
+    "type": "text",
+    "required": false,
+    "help": "Filter tasks by person.",
+    "advanced": true
+  },
+  {
+    "name": "queryPersonEmail",
+    "label": "Person Email",
+    "type": "text",
+    "required": false,
+    "help": "Filter tasks by the person's exact email address. Cannot be combined with `person_id`. Email matching is case-insensitive.",
+    "advanced": true
+  },
+  {
+    "name": "limit",
+    "label": "Limit",
+    "type": "uinteger",
+    "default": 50,
+    "required": true,
+    "validate": {
+      "min": 1,
+      "max": 1000
+    },
+    "help": "Maximum number of records to return in this execution. Make runtime pagination limits also apply."
+  }
+]

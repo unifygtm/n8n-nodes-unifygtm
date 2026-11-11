@@ -1,0 +1,9 @@
+{
+  "url": "/tasks/v1/tasks/query-jobs",
+  "method": "POST",
+  "encodeUrl": false,
+  "body": "{{parseJSON(ifempty(parameters.requestBody, '{}'))}}",
+  "response": {
+    "output": "{{body}}"
+  }
+}

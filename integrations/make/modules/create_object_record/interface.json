@@ -1,0 +1,39 @@
+[
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "data",
+    "label": "Data",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "object",
+        "label": "Object",
+        "type": "text"
+      },
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "created_at",
+        "label": "Created At",
+        "type": "text"
+      },
+      {
+        "name": "updated_at",
+        "label": "Updated At",
+        "type": "text"
+      },
+      {
+        "name": "attributes",
+        "label": "Attributes",
+        "type": "any"
+      }
+    ]
+  }
+]

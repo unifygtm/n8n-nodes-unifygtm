@@ -1,0 +1,9 @@
+{
+  "name": "delete_task",
+  "label": "Delete Task",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Delete Task in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks/{id}"
+}

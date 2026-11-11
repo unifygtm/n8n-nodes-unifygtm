@@ -1,0 +1,33 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the object.",
+    "advanced": false
+  },
+  {
+    "name": "pathAttributeName",
+    "label": "Attribute Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the attribute.",
+    "advanced": false
+  },
+  {
+    "name": "pathOptionName",
+    "label": "Option Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the attribute option.",
+    "advanced": false
+  },
+  {
+    "name": "requestBody",
+    "label": "Request Body (JSON)",
+    "type": "text",
+    "required": true,
+    "help": "Enter the complete JSON request body for update_object_attribute_option. Preserve JSON types. See docs/operation-contracts.json and the Unify API reference."
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "name": "cancel_sequence_enrollment_query_job",
+  "label": "Cancel Sequence Enrollment Query Job",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Cancel Sequence Enrollment Query Job in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments/query-jobs/{job_id}/cancel"
+}

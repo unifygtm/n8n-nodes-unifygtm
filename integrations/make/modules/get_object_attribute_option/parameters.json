@@ -1,0 +1,26 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the object.",
+    "advanced": false
+  },
+  {
+    "name": "pathAttributeName",
+    "label": "Attribute Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the attribute.",
+    "advanced": false
+  },
+  {
+    "name": "pathOptionName",
+    "label": "Option Name",
+    "type": "text",
+    "required": true,
+    "help": "API name of the attribute option.",
+    "advanced": false
+  }
+]

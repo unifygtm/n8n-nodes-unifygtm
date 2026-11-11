@@ -1,0 +1,9 @@
+{
+  "name": "get_list",
+  "label": "Get List",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Get List in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists/{list_id}"
+}

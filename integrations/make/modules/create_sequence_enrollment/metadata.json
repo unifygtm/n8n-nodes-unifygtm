@@ -1,0 +1,9 @@
+{
+  "name": "create_sequence_enrollment",
+  "label": "Create Sequence Enrollment",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Create Sequence Enrollment in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/enrollments"
+}

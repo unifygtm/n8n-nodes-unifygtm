@@ -1,0 +1,17 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object Name",
+    "type": "text",
+    "required": true,
+    "help": "The API name of an object, e.g. `company`, `person`, `opportunity`, or a custom object's API name.",
+    "advanced": false
+  },
+  {
+    "name": "requestBody",
+    "label": "Request Body (JSON)",
+    "type": "text",
+    "required": true,
+    "help": "Enter the complete JSON request body for create_object_record_query_job. Preserve JSON types. See docs/operation-contracts.json and the Unify API reference."
+  }
+]

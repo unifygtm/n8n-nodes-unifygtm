@@ -1,0 +1,9 @@
+{
+  "name": "list_object_attribute_options",
+  "label": "List Object Attribute Options",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Object Attribute Options in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}/options"
+}

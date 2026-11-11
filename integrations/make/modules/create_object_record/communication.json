@@ -1,0 +1,12 @@
+{
+  "url": "/data/v1/objects/{{encodeURL(parameters.pathObjectName)}}/records",
+  "method": "POST",
+  "encodeUrl": false,
+  "body": "{{parseJSON(ifempty(parameters.requestBody, '{}'))}}",
+  "response": {
+    "output": "{{body}}"
+  },
+  "qs": {
+    "validation_mode": "{{parameters.queryValidationMode}}"
+  }
+}

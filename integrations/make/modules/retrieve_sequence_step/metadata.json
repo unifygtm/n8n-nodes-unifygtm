@@ -1,0 +1,9 @@
+{
+  "name": "retrieve_sequence_step",
+  "label": "Retrieve Sequence Step",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Retrieve Sequence Step in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/sequences/{id}/steps/{step_id}"
+}

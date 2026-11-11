@@ -1,0 +1,9 @@
+{
+  "name": "update_list",
+  "label": "Update List",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Update List in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists/{list_id}"
+}

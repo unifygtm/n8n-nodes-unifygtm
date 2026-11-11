@@ -1,0 +1,10 @@
+{
+  "url": "/sequences/v1/sequences/{{encodeURL(parameters.pathId)}}/resume",
+  "method": "POST",
+  "encodeUrl": false,
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

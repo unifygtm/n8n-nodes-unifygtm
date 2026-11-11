@@ -1,0 +1,47 @@
+[
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "data",
+    "label": "Data",
+    "type": "array",
+    "spec": {
+      "type": "any"
+    }
+  },
+  {
+    "name": "summary",
+    "label": "Summary",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "total",
+        "label": "Total",
+        "type": "number"
+      },
+      {
+        "name": "added",
+        "label": "Added",
+        "type": "number"
+      },
+      {
+        "name": "already_in_list",
+        "label": "Already In List",
+        "type": "number"
+      },
+      {
+        "name": "record_not_found",
+        "label": "Record Not Found",
+        "type": "number"
+      },
+      {
+        "name": "object_mismatch",
+        "label": "Object Mismatch",
+        "type": "number"
+      }
+    ]
+  }
+]

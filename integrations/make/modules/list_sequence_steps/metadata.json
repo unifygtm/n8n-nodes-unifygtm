@@ -1,0 +1,9 @@
+{
+  "name": "list_sequence_steps",
+  "label": "List Sequence Steps",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Sequence Steps in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/sequences/{id}/steps"
+}

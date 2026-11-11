@@ -1,0 +1,49 @@
+[
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "data",
+    "label": "Data",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "id",
+        "label": "Id",
+        "type": "text"
+      },
+      {
+        "name": "created_at",
+        "label": "Created At",
+        "type": "text"
+      },
+      {
+        "name": "updated_at",
+        "label": "Updated At",
+        "type": "text"
+      },
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text"
+      },
+      {
+        "name": "object",
+        "label": "Object",
+        "type": "text"
+      },
+      {
+        "name": "owner_id",
+        "label": "Owner ID",
+        "type": "text"
+      },
+      {
+        "name": "share_status",
+        "label": "Share Status",
+        "type": "text"
+      }
+    ]
+  }
+]

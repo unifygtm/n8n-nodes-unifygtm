@@ -1,0 +1,8 @@
+{
+  "url": "/sequences/v1/enrollments/{{encodeURL(parameters.pathId)}}",
+  "method": "DELETE",
+  "encodeUrl": false,
+  "response": {
+    "output": "{{body}}"
+  }
+}

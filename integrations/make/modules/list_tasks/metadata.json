@@ -1,0 +1,9 @@
+{
+  "name": "list_tasks",
+  "label": "List Tasks",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Tasks in Unify.",
+  "api": "tasks",
+  "sourcePath": "/tasks/v1/tasks"
+}

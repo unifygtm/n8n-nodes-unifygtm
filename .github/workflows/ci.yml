@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run generate
+      - run: git diff --exit-code -- nodes/shared/catalog.json docs/API-COVERAGE.md docs/operation-contracts.json integrations/make
+      - run: npm run check
+      - run: npm pack --dry-run

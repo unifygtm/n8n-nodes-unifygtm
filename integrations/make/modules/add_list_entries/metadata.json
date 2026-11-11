@@ -1,0 +1,9 @@
+{
+  "name": "add_list_entries",
+  "label": "Add List Entries",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Add List Entries in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists/{list_id}/entries/add"
+}

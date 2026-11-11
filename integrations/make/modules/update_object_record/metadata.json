@@ -1,0 +1,9 @@
+{
+  "name": "update_object_record",
+  "label": "Update Object Record",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Update Object Record in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/records/{record_id}"
+}

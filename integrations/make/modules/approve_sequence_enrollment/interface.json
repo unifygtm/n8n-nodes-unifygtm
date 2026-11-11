@@ -1,0 +1,12 @@
+[
+  {
+    "name": "id",
+    "label": "Id",
+    "type": "text"
+  },
+  {
+    "name": "is_draft_approval_pending",
+    "label": "Is Draft Approval Pending",
+    "type": "boolean"
+  }
+]

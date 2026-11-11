@@ -1,0 +1,9 @@
+{
+  "name": "delete_sequence",
+  "label": "Delete Sequence",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Delete Sequence in Unify.",
+  "api": "sequences",
+  "sourcePath": "/sequences/v1/sequences/{id}"
+}

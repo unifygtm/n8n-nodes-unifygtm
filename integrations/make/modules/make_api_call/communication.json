@@ -1,0 +1,16 @@
+{
+  "url": "https://api.unifygtm.com/{{parameters.url}}",
+  "method": "{{parameters.method}}",
+  "type": "text",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{{parameters.body}}",
+  "response": {
+    "output": {
+      "body": "{{body}}",
+      "headers": "{{headers}}",
+      "statusCode": "{{statusCode}}"
+    }
+  }
+}

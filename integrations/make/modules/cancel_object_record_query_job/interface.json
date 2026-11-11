@@ -1,0 +1,12 @@
+[
+  {
+    "name": "job_id",
+    "label": "Job ID",
+    "type": "text"
+  },
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  }
+]

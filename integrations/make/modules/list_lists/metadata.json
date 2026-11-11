@@ -1,0 +1,9 @@
+{
+  "name": "list_lists",
+  "label": "List Lists",
+  "type": "search",
+  "connection": "api-key",
+  "description": "List Lists in Unify.",
+  "api": "data",
+  "sourcePath": "/data/v1/lists"
+}

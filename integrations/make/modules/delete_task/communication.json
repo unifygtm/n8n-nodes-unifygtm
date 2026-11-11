@@ -1,0 +1,10 @@
+{
+  "url": "/tasks/v1/tasks/{{encodeURL(parameters.pathId)}}",
+  "method": "DELETE",
+  "encodeUrl": false,
+  "response": {
+    "output": {
+      "result": "{{body}}"
+    }
+  }
+}

@@ -1,0 +1,144 @@
+[
+  {
+    "name": "id",
+    "label": "Id",
+    "type": "text"
+  },
+  {
+    "name": "created_at",
+    "label": "Created At",
+    "type": "text"
+  },
+  {
+    "name": "updated_at",
+    "label": "Updated At",
+    "type": "text"
+  },
+  {
+    "name": "enrollment_id",
+    "label": "Enrollment ID",
+    "type": "text"
+  },
+  {
+    "name": "sequence_id",
+    "label": "Sequence ID",
+    "type": "text"
+  },
+  {
+    "name": "step_id",
+    "label": "Step ID",
+    "type": "text"
+  },
+  {
+    "name": "type",
+    "label": "Type",
+    "type": "text"
+  },
+  {
+    "name": "status",
+    "label": "Status",
+    "type": "text"
+  },
+  {
+    "name": "step_number",
+    "label": "Step Number",
+    "type": "number"
+  },
+  {
+    "name": "is_blocked",
+    "label": "Is Blocked",
+    "type": "boolean"
+  },
+  {
+    "name": "is_bounced",
+    "label": "Is Bounced",
+    "type": "boolean"
+  },
+  {
+    "name": "is_canceled",
+    "label": "Is Canceled",
+    "type": "boolean"
+  },
+  {
+    "name": "is_opted_out",
+    "label": "Is Opted Out",
+    "type": "boolean"
+  },
+  {
+    "name": "is_paused",
+    "label": "Is Paused",
+    "type": "boolean"
+  },
+  {
+    "name": "is_replied",
+    "label": "Is Replied",
+    "type": "boolean"
+  },
+  {
+    "name": "started_at",
+    "label": "Started At",
+    "type": "text"
+  },
+  {
+    "name": "ended_at",
+    "label": "Ended At",
+    "type": "text"
+  },
+  {
+    "name": "email",
+    "label": "Email",
+    "type": "collection",
+    "spec": [
+      {
+        "name": "version_id",
+        "label": "Version ID",
+        "type": "text"
+      },
+      {
+        "name": "subject",
+        "label": "Subject",
+        "type": "text"
+      },
+      {
+        "name": "fallback_subject",
+        "label": "Fallback Subject",
+        "type": "text"
+      },
+      {
+        "name": "body",
+        "label": "Body",
+        "type": "text"
+      },
+      {
+        "name": "is_ready",
+        "label": "Is Ready",
+        "type": "boolean"
+      },
+      {
+        "name": "is_edited",
+        "label": "Is Edited",
+        "type": "boolean"
+      },
+      {
+        "name": "is_root_message",
+        "label": "Is Root Message",
+        "type": "boolean"
+      },
+      {
+        "name": "is_blocked",
+        "label": "Is Blocked",
+        "type": "boolean"
+      },
+      {
+        "name": "scheduled_send_at",
+        "label": "Scheduled Send At",
+        "type": "text"
+      },
+      {
+        "name": "sent_at",
+        "label": "Sent At",
+        "type": "text"
+      }
+    ]
+  }
+]
