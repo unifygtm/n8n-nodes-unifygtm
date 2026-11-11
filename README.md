@@ -2,7 +2,7 @@
 
 Connect n8n workflows to the [Unify API](https://docs.unifygtm.com/). The Unify node implements 78 operations across the Data, Sequences and Tasks APIs.
 
-**Release status:** implementation and local tests complete; authenticated workspace tests, npm publication and n8n verification are pending. This repository does not imply an approved marketplace listing.
+**Release status:** implementation, automated tests and limited authenticated read-only smoke tests complete. Broader operation testing, npm publication and n8n verification are pending. This repository does not imply an approved marketplace listing.
 
 ## Capabilities
 

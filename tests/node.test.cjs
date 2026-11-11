@@ -95,6 +95,18 @@ test('credentials use a masked API key and read-only authentication check', () =
 	assert.equal(credential.test.request.url, '/data/v1/objects');
 });
 
+test('resource defaults never select a write operation', () => {
+	const selectors = buildProperties(false).filter((property) => property.name === 'operation');
+	for (const selector of selectors) {
+		assert.equal(get(selector.default).method, 'GET', selector.default);
+	}
+	const defaultFor = (resource) =>
+		selectors.find((property) => property.displayOptions.show.resource[0] === resource).default;
+	assert.equal(defaultFor('Sequences'), 'list_sequences');
+	assert.equal(defaultFor('Tasks'), 'list_tasks');
+	assert.equal(defaultFor('Objects'), 'list_objects');
+});
+
 test('encodes path identifiers and rejects relative traversal segments', () => {
 	const op = get('get_object_record');
 	const request = buildRequest(op, { pathObjectName: 'people', pathRecordId: 'a/b?x=1#frag' });

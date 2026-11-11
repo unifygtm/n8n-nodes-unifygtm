@@ -80,7 +80,15 @@ export function buildProperties(analytics: boolean): INodeProperties[] {
 			})),
 			default: '',
 		});
-		properties[properties.length - 1].default = ops[0].id;
+		const readOperations = ops
+			.filter((op) => op.method === 'GET')
+			.sort((a, b) => {
+				const requiredDifference =
+					a.fields.filter((field) => field.required).length -
+					b.fields.filter((field) => field.required).length;
+				return requiredDifference || Number(b.isList) - Number(a.isList);
+			});
+		properties[properties.length - 1].default = (readOperations[0] ?? ops[0]).id;
 	}
 	for (const op of selected) {
 		const show = { resource: [op.resource], operation: [op.id] };
