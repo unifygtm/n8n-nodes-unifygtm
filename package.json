@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Unify API node for records, lists, sequences, enrollments and tasks",
   "license": "MIT",
-  "homepage": "https://docs.unifygtm.com/",
+  "homepage": "https://www.unifygtm.com/",
   "keywords": [
     "n8n-community-node-package"
   ],

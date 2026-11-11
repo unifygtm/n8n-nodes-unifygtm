@@ -8,6 +8,6 @@ Current owners: GitHub organization `unifygtm`, npm account `rocco-unify`, n8n C
 4. Update the version, lockfile and changelog. Commit and push, then create and push the matching `vX.Y.Z` tag. The tag triggers `.github/workflows/publish.yml`, which verifies the version, runs checks and publishes with provenance.
 5. Verify the public npm package, version, contents and provenance. Then submit its URL in the n8n Creator Portal. Claim official representation only with the organization's authorization. Submission is not approval; retain status **Submitted** until n8n confirms verification.
 
-The first release is not yet published. No release tag has been created.
+After the initial release, revoke the temporary npm token and remove `NPM_TOKEN` from GitHub. Further releases require a newly authorized credential or configured trusted publisher.
 
-Sources: [n8n verification guidelines](https://docs.n8n.io/integrations/creating-nodes/build/reference/verification-guidelines/), [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/).
+Sources: [n8n verification guidelines](https://docs.n8n.io/connect/create-nodes/build-your-node/reference/verification-guidelines/), [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/).

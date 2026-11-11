@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 (2026-11-11)
 
 - Implement 78 Unify Data, Sequences and Tasks operations with API-key credentials.
 - Add cursor/page pagination, output limits, item linkage and validation.

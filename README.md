@@ -2,7 +2,7 @@
 
 Connect n8n workflows to the [Unify API](https://docs.unifygtm.com/). The Unify node implements 78 operations across the Data, Sequences and Tasks APIs.
 
-**Release status:** implementation, automated tests and limited authenticated read-only smoke tests complete. Broader operation testing, npm publication and n8n verification are pending. This repository does not imply an approved marketplace listing.
+**Validation:** automated tests and limited authenticated read-only smoke tests are complete. Broader live operation testing and n8n verification are pending. This package does not imply an approved marketplace listing.
 
 ## Capabilities
 
@@ -17,7 +17,7 @@ Connect n8n workflows to the [Unify API](https://docs.unifygtm.com/). The Unify 
 
 ## Credentials
 
-Create a key in [Unify Settings > Developers](https://app.unifygtm.com/dashboard/settings/integrations/api-keys), then enter it in an **Unify API** credential in n8n. The connection test performs a read-only `GET /data/v1/objects` request. Keys are sent using `X-Api-Key` to `https://api.unifygtm.com`.
+Create a key in [Unify Settings > Developers](https://app.unifygtm.com/dashboard/settings/data/developers), then enter it in an **Unify API** credential in n8n. The connection test performs a read-only `GET /data/v1/objects` request. Keys are sent using `X-Api-Key` to `https://api.unifygtm.com`.
 
 Analytics uses a separate Write Key and API host. Its three operations are excluded from the shipped package because the public schema provides no read-only credential test. The unfinished source is retained under `experimental/analytics/`.
 
@@ -33,7 +33,7 @@ npm run dev -- --custom-user-folder /tmp/unify-n8n-preview
 
 The official n8n development CLI starts an isolated local instance and registers this node. Add a Manual Trigger and a Unify node, select **Objects > List Objects**, and select your credential. This verifies a read operation without editing workspace data.
 
-After public npm publication, self-hosted users can install `n8n-nodes-unifygtm` through **Settings > Community Nodes**. n8n Cloud availability requires n8n verification first.
+Self-hosted users can install `n8n-nodes-unifygtm` through **Settings > Community Nodes**. n8n Cloud availability requires n8n verification first.
 
 ## Usage
 
