@@ -1,6 +1,6 @@
 # Authenticated smoke tests
 
-Status: limited authenticated read-only smoke tests passed on 2026-11-11 in n8n 2.47.4. Full operation coverage remains pending. Automated mock tests do not establish live compatibility for untested operations.
+Status: limited authenticated read-only smoke tests passed on 2026-11-11 in local n8n 2.47.4 and the MCP-connected n8n 2.42.7 instance. Full operation coverage remains pending. Automated mock tests do not establish live compatibility for untested operations.
 
 Use a dedicated test workspace and enter the API key in the platform credential UI. Do not commit credentials, real IDs, captured headers or customer response data.
 
@@ -23,8 +23,22 @@ Do not test sequence enrollment, approval or resume against real prospects. Vali
 
 ## Low-cost test scope
 
-The user requested minimal credit use. Executed the credential check and three read-only node runs: List Objects, List Sequences (limit 1), and List Tasks (limit 1). No enrichment, record writes, query jobs, sequence enrollments, outreach or retries were performed. Actual billing counters were not inspected, so no numeric credit-consumption claim is made. Credentials are stored in local n8n, not in this repository.
+The user requested minimal credit use. Local testing executed the credential check and three read-only node runs: List Objects, List Sequences (limit 1), and List Tasks (limit 1). No enrichment, record writes, query jobs, sequence enrollments, outreach or retries were performed. Actual billing counters were not inspected, so no numeric credit-consumption claim is made. Credentials are stored in n8n, not in this repository.
 
 The first object-list run used the UI default of 50 and returned 38 object definitions. The attempted UI change to 1 did not persist. Subsequent sequence and task limits were explicitly verified as 1 before execution. These object definitions are workspace schema metadata, not enriched records.
 
 UI testing also exposed write operations selected by alphabetical resource defaults. Defaults now prefer GET operations with the fewest required inputs; regression tests ensure all shipped resources start with a read operation.
+
+## Published package and AI tool demo
+
+Installed `n8n-nodes-unifygtm@0.1.0` from npm on the MCP-connected n8n 2.42.7 instance. The continuous review video demonstrated installation, a new workflow, a new credential with a successful connection test, and these operations:
+
+| Test | Observed result |
+| --- | --- |
+| List Objects, limit 1 | One standard company object definition returned |
+| Get Object, API name `company` | Company object schema returned successfully |
+| AI Agent using Unify Objects as a tool | Tool executed once with limit 1; the agent reported the returned API name |
+
+The existing OpenAI credential was reused with `gpt-4.1-mini`. Two manual agent demonstrations succeeded, including the recorded workflow. The prompt limited the agent to one read-only schema tool call. Both demo workflows remain inactive, without scheduled or webhook triggers. The remote tests performed no enrichment, record writes or outreach. These results establish the tested read actions and AI tool connection only, not all 78 operations.
+
+The video was uploaded to the n8n Creator Portal. Automated review passed and manual review is **UNDER REVIEW**.

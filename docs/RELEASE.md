@@ -18,4 +18,4 @@ On November 11, 2026, version [0.1.0](https://www.npmjs.com/package/n8n-nodes-un
 
 The temporary publishing token was revoked and the GitHub `NPM_TOKEN` secret removed. Trusted publishing is not configured.
 
-The package was submitted to the n8n Creator Portal and ownership was confirmed. Automated review is in progress; this is not n8n approval or a public integration listing. Live API validation remains limited to the read operations documented in `SMOKE-TEST.md`.
+The package was submitted to the n8n Creator Portal and ownership was confirmed. Automated review passed. A continuous demo video (approximately 2 minutes 40 seconds) was uploaded, and the portal confirmed manual review is **UNDER REVIEW**. The portal estimates up to four weeks for review. This is not n8n approval or a public integration listing. Live API validation remains limited to the read operations documented in `SMOKE-TEST.md`.
