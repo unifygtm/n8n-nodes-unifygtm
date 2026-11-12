@@ -1,6 +1,10 @@
 # Unify custom app for Make
 
-Status: private app created in Make on November 11, 2026, with the official orange monogram and initial Base configuration. The 79 component sets are prepared locally; module upload, authenticated scenario execution, and review submission remain pending. A temporary token with only `sdk-apps:read` and `sdk-apps:write`, limited to the selected organization, is awaiting owner authorization before SDK upload.
+Status: submitted to Make for review on November 11, 2026. Make displays **pending approval** and **Review process started**. The app is published for invite-link distribution, with five visible modules: List Objects, Get Object, List Object Attributes, Get Object Attribute, and Make an API Call. The other 74 uploaded modules remain hidden and are outside this initial review scope. Catalog approval and an integration directory page are not yet confirmed.
+
+All 79 modules, Base and connection sections were uploaded through the official Make SDK and read back exactly. The five visible modules completed one authenticated, read-only scenario successfully (5 operations, 5 Make credits). A separate missing-object test returned a sanitized HTTP 404 error (1 operation, 0 Make credits). These tests read schema definitions only; no enrichment, record changes or outreach was performed. Both scenarios remain inactive. The temporary SDK token was revoked and its local file removed after submission.
+
+See [validation evidence](VALIDATION.md) and [user documentation](APP-DOCUMENTATION.md).
 
 The generated source contains 78 API operation modules and one universal API-call module. `manifest.json` is a local inventory, not a supported one-click import format.
 
@@ -23,8 +27,8 @@ The generated source contains 78 API operation modules and one universal API-cal
 - **Make an API Call** always prefixes the Unify API host. Enter a relative URL such as `/data/v1/objects`; authentication is provided by the connection. Redirects are disabled in Base.
 - Analytics is excluded because it uses different credentials and has no documented read-only connection test.
 
-The automated tests check component coverage and structural invariants. They do not evaluate Make IML, validate editor acceptance or prove API execution. These are required next steps in a real Make account.
+The automated tests check component coverage and structural invariants. They do not evaluate Make IML, validate editor acceptance or prove API execution. The five visible modules were additionally exercised in the real Make account. The remaining 74 modules still need live testing before publication.
 
-An additional check against the official Make editor schemas identified and corrected the redirect directive names (`followRedirects` and `followAllRedirects`) and omitted empty parameter help strings. Schema warnings about absent bodies on bodyless POST actions are advisory: those provider operations do not define request bodies. Live validation remains pending.
+An additional check against the official Make editor schemas identified and corrected the redirect directive names (`followRedirects` and `followAllRedirects`) and omitted empty parameter help strings. Schema warnings about absent bodies on bodyless POST actions are advisory: those provider operations do not define request bodies. The five visible modules passed the runtime checks above. Broader validation remains pending for hidden modules.
 
 Sources: [Make custom apps](https://developers.make.com/custom-apps-documentation), [pagination](https://developers.make.com/custom-apps-documentation/component-blocks/api/pagination), [universal module](https://developers.make.com/custom-apps-documentation/app-components/modules/universal-module/rest).

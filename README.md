@@ -55,7 +55,7 @@ Run `npm run generate` after intentionally updating the public source schemas. R
 
 ## Make
 
-[Make custom app source](integrations/make/README.md) includes 78 operation component sets and a universal API-call module. It is a source draft for the Make developer editor, not a scenario blueprint or a deployed app. Make account setup and runtime validation are pending.
+[Make custom app source](integrations/make/README.md) includes 78 operation component sets and a universal API-call module. All 79 modules have been uploaded. Five modules passed read-only runtime tests and are visible in the published app; the other 74 remain hidden. The initial Make directory review was submitted on November 11, 2026 and is pending approval.
 
 ## Release
 
