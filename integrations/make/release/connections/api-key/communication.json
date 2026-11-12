@@ -1,0 +1,20 @@
+{
+  "url": "https://api.unifygtm.com/data/v1/objects",
+  "method": "GET",
+  "headers": {
+    "x-api-key": "{{parameters.apiKey}}"
+  },
+  "followRedirects": false,
+  "followAllRedirects": false,
+  "response": {
+    "valid": "{{statusCode === 200}}",
+    "error": {
+      "message": "[{{statusCode}}] {{ifempty(body.message, ifempty(body.error.message, 'Unify API request failed. Check the request parameters and permissions.'))}}"
+    }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers.x-api-key"
+    ]
+  }
+}

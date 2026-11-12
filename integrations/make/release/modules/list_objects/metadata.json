@@ -1,0 +1,10 @@
+{
+  "name": "list_objects",
+  "label": "List objects",
+  "type": "search",
+  "connection": "api-key",
+  "description": "Lists object definitions.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects",
+  "action": "read"
+}

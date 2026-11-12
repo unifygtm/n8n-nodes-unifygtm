@@ -1,0 +1,8 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object API name",
+    "type": "text",
+    "required": true
+  }
+]

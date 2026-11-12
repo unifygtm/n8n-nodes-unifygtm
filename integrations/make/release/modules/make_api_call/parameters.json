@@ -1,0 +1,84 @@
+[
+  {
+    "name": "url",
+    "label": "URL",
+    "type": "text",
+    "required": true,
+    "validate": {
+      "pattern": "^/(?!/).*"
+    },
+    "help": "Enter a path relative to https://api.unifygtm.com, for example /data/v1/objects."
+  },
+  {
+    "name": "method",
+    "label": "Method",
+    "type": "select",
+    "required": true,
+    "default": "GET",
+    "options": [
+      {
+        "label": "GET",
+        "value": "GET"
+      },
+      {
+        "label": "POST",
+        "value": "POST"
+      },
+      {
+        "label": "PUT",
+        "value": "PUT"
+      },
+      {
+        "label": "PATCH",
+        "value": "PATCH"
+      },
+      {
+        "label": "DELETE",
+        "value": "DELETE"
+      }
+    ]
+  },
+  {
+    "name": "headers",
+    "label": "Headers",
+    "type": "array",
+    "spec": [
+      {
+        "name": "key",
+        "label": "Key",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "value",
+        "label": "Value",
+        "type": "text"
+      }
+    ],
+    "help": "The API key is added automatically. Do not add authentication headers."
+  },
+  {
+    "name": "qs",
+    "label": "Query string",
+    "type": "array",
+    "spec": [
+      {
+        "name": "key",
+        "label": "Key",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "value",
+        "label": "Value",
+        "type": "text"
+      }
+    ]
+  },
+  {
+    "name": "body",
+    "label": "Body",
+    "type": "text",
+    "help": "Enter the JSON request body, if required."
+  }
+]

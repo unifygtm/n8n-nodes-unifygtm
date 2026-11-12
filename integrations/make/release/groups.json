@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Objects",
+    "modules": [
+      "listObjects",
+      "getObject"
+    ]
+  },
+  {
+    "label": "Object attributes",
+    "modules": [
+      "listObjectAttributes",
+      "getObjectAttribute"
+    ]
+  },
+  {
+    "label": "Other",
+    "modules": [
+      "makeApiCall"
+    ]
+  }
+]

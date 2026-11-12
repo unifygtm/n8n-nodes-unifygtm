@@ -1,3 +1,7 @@
+# Current review scope
+
+The five-module release lives in [release/](release/). The 74 remaining prototype modules are archived in Make after the November 11 review. The original catalog below is retained for future development and is not a validated release. See [REVIEW-FIXES.md](REVIEW-FIXES.md).
+
 # Unify custom app for Make
 
 Status: submitted to Make for review on November 11, 2026. Make displays **pending approval** and **Review process started**. The app is published for invite-link distribution, with five visible modules: List Objects, Get Object, List Object Attributes, Get Object Attribute, and Make an API Call. The other 74 uploaded modules remain hidden and are outside this initial review scope. Catalog approval and an integration directory page are not yet confirmed.

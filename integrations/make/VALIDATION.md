@@ -1,3 +1,7 @@
+# Review correction update
+
+The initial validation below is historical. See [REVIEW-FIXES.md](REVIEW-FIXES.md) for the corrected five-module release, new successful runs and the remaining review-scope question. The 74 prototype modules are now archived.
+
 # Make validation and release evidence
 
 Date: November 11, 2026.

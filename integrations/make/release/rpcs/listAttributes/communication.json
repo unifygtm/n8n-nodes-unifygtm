@@ -1,0 +1,13 @@
+{
+  "url": "/data/v1/objects/{{encodeURL(parameters.pathObjectName)}}/attributes",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.data}}",
+    "limit": 100,
+    "output": {
+      "label": "{{item.display_name}} ({{item.api_name}})",
+      "value": "{{item.api_name}}"
+    }
+  }
+}

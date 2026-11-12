@@ -1,0 +1,21 @@
+{
+  "url": "https://api.unifygtm.com/{{parameters.url}}",
+  "method": "{{parameters.method}}",
+  "type": "text",
+  "headers": {
+    "Content-Type": "application/json",
+    "{{...}}": "{{toCollection(parameters.headers, 'key', 'value')}}",
+    "x-api-key": "{{connection.apiKey}}"
+  },
+  "body": "{{parameters.body}}",
+  "response": {
+    "output": {
+      "body": "{{body}}",
+      "headers": "{{headers}}",
+      "statusCode": "{{statusCode}}"
+    }
+  },
+  "qs": {
+    "{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"
+  }
+}

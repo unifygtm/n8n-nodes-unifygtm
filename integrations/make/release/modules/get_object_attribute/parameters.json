@@ -1,0 +1,24 @@
+[
+  {
+    "name": "pathObjectName",
+    "label": "Object",
+    "type": "select",
+    "required": true,
+    "help": "Select an object or map its API name.",
+    "mode": "edit",
+    "options": {
+      "store": "rpc://listObjects",
+      "nested": [
+        {
+          "name": "pathAttributeName",
+          "label": "Attribute",
+          "type": "select",
+          "required": true,
+          "help": "Select an attribute or map its API name. Choose an object first.",
+          "mode": "edit",
+          "options": "rpc://listAttributes"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "name": "get_object",
+  "label": "Get an object",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Retrieves an object definition.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}",
+  "action": "read"
+}

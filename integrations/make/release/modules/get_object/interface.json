@@ -1,0 +1,22 @@
+[
+  {
+    "name": "provider",
+    "label": "Provider",
+    "type": "text"
+  },
+  {
+    "name": "api_name",
+    "label": "API name",
+    "type": "text"
+  },
+  {
+    "name": "display_name",
+    "label": "Display name",
+    "type": "text"
+  },
+  {
+    "name": "description",
+    "label": "Description",
+    "type": "text"
+  }
+]

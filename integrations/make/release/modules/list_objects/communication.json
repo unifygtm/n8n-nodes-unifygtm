@@ -1,0 +1,10 @@
+{
+  "url": "/data/v1/objects",
+  "method": "GET",
+  "encodeUrl": false,
+  "response": {
+    "iterate": "{{body.data}}",
+    "output": "{{item}}",
+    "limit": "{{ifempty(parameters.limit, 10)}}"
+  }
+}

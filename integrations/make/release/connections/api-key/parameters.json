@@ -1,0 +1,10 @@
+[
+  {
+    "name": "apiKey",
+    "label": "API key",
+    "type": "password",
+    "required": true,
+    "editable": true,
+    "help": "Create a key in Unify Settings > Developers."
+  }
+]

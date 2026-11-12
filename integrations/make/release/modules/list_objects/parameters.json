@@ -1,0 +1,14 @@
+[
+  {
+    "name": "limit",
+    "label": "Limit",
+    "type": "uinteger",
+    "default": 10,
+    "required": false,
+    "validate": {
+      "min": 1,
+      "max": 1000
+    },
+    "help": "Maximum number of results returned in one execution."
+  }
+]

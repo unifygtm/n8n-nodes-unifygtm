@@ -24,7 +24,7 @@
     "release": "n8n-node release",
     "prepublishOnly": "n8n-node prerelease",
     "test": "npm run build && node --test tests/*.test.cjs",
-    "generate": "python3 scripts/generate.py && python3 scripts/generate_make.py",
+    "generate": "python3 scripts/generate.py && python3 scripts/generate_make.py && python3 scripts/generate_make_release.py",
     "check": "npm run lint && npm test"
   },
   "files": [

@@ -1,0 +1,7 @@
+{
+  "name": "make_api_call",
+  "label": "Make an API call",
+  "type": "universal",
+  "connection": "api-key",
+  "description": "Performs an arbitrary authorized API call."
+}

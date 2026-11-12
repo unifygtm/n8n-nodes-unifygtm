@@ -1,0 +1,10 @@
+{
+  "name": "get_object_attribute",
+  "label": "Get an object attribute",
+  "type": "action",
+  "connection": "api-key",
+  "description": "Retrieves an object attribute definition.",
+  "api": "data",
+  "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}",
+  "action": "read"
+}

@@ -1,0 +1,59 @@
+{
+  "name": "unifygtm",
+  "label": "Unify",
+  "version": 1,
+  "status": "review-fixes-awaiting-runtime-validation",
+  "modules": [
+    {
+      "name": "list_objects",
+      "label": "List objects",
+      "type": "search",
+      "connection": "api-key",
+      "description": "Lists object definitions.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects",
+      "action": "read"
+    },
+    {
+      "name": "get_object",
+      "label": "Get an object",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Retrieves an object definition.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}",
+      "action": "read"
+    },
+    {
+      "name": "list_object_attributes",
+      "label": "List object attributes",
+      "type": "search",
+      "connection": "api-key",
+      "description": "Lists the attributes of an object.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes",
+      "action": "read"
+    },
+    {
+      "name": "get_object_attribute",
+      "label": "Get an object attribute",
+      "type": "action",
+      "connection": "api-key",
+      "description": "Retrieves an object attribute definition.",
+      "api": "data",
+      "sourcePath": "/data/v1/objects/{object_name}/attributes/{attribute_name}",
+      "action": "read"
+    },
+    {
+      "name": "make_api_call",
+      "label": "Make an API call",
+      "type": "universal",
+      "connection": "api-key",
+      "description": "Performs an arbitrary authorized API call."
+    }
+  ],
+  "rpcs": [
+    "listObjects",
+    "listAttributes"
+  ]
+}
