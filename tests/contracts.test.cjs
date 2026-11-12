@@ -81,8 +81,8 @@ test('Make component catalog is complete and keeps credentials on the Unify host
 	const base = require('../integrations/make/base.json');
 	assert.equal(manifest.modules.length, 79);
 	assert.equal(base.baseUrl, 'https://api.unifygtm.com');
-	assert.equal(base.followRedirect, false);
-	assert.equal(base.followAllRedirect, false);
+	assert.equal(base.followRedirects, false);
+	assert.equal(base.followAllRedirects, false);
 	for (const module of manifest.modules) {
 		const dir = `../integrations/make/modules/${module.name}`;
 		const comm = require(`${dir}/communication.json`);

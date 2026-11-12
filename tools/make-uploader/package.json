@@ -1,0 +1,8 @@
+{
+  "name": "unify-make-uploader",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@makehq/sdk": "1.8.1"
+  }
+}

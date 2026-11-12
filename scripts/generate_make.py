@@ -33,9 +33,9 @@ def output_field(name, schema, doc, depth=0):
     return result
 
 sanitize = {'sanitize': ['request.headers.`X-Api-Key`', 'request.headers.`x-api-key`']}
-save('base.json', {'baseUrl':'https://api.unifygtm.com', 'headers':{'X-Api-Key':'{{connection.apiKey}}','Accept':'application/json'}, 'type':'json', 'followRedirect':False, 'followAllRedirect':False, 'log':sanitize, 'response':{'error':{'message':'Unify request failed (HTTP {{statusCode}}). Check the operation parameters, permissions and API documentation.'}}})
+save('base.json', {'baseUrl':'https://api.unifygtm.com', 'headers':{'X-Api-Key':'{{connection.apiKey}}','Accept':'application/json'}, 'type':'json', 'followRedirects':False, 'followAllRedirects':False, 'log':sanitize, 'response':{'error':{'message':'Unify request failed (HTTP {{statusCode}}). Check the operation parameters, permissions and API documentation.'}}})
 save('connections/api-key/parameters.json', [{'name':'apiKey','label':'API Key','type':'password','required':True,'editable':True,'help':'Create a key in Unify Settings > Developers.'}])
-save('connections/api-key/communication.json', {'url':'https://api.unifygtm.com/data/v1/objects','method':'GET','headers':{'X-Api-Key':'{{parameters.apiKey}}'}, 'followRedirect':False,'followAllRedirect':False,'response':{'valid':'{{statusCode === 200}}','error':{'message':'Unify authentication failed (HTTP {{statusCode}}).'}},'log':sanitize})
+save('connections/api-key/communication.json', {'url':'https://api.unifygtm.com/data/v1/objects','method':'GET','headers':{'X-Api-Key':'{{parameters.apiKey}}'}, 'followRedirects':False,'followAllRedirects':False,'response':{'valid':'{{statusCode === 200}}','error':{'message':'Unify authentication failed (HTTP {{statusCode}}).'}},'log':sanitize})
 
 manifest = []
 for op in catalog:
@@ -61,6 +61,8 @@ for op in catalog:
             p.pop('spec')
         if f['minimum'] is not None or f['maximum'] is not None:
             p['validate'] = {k:v for k,v in [('min',f['minimum']),('max',f['maximum'])] if v is not None}
+        if not p['help']:
+            p.pop('help')
         params.append(p)
         if f['location'] == 'path':
             path = path.replace('{'+f['name']+'}', '{{encodeURL(parameters.'+f['key']+')}}')

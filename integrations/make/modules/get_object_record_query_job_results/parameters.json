@@ -12,7 +12,6 @@
     "label": "Job ID",
     "type": "text",
     "required": true,
-    "help": "",
     "advanced": false
   },
   {
@@ -20,7 +19,6 @@
     "label": "Page",
     "type": "integer",
     "required": false,
-    "help": "",
     "advanced": true,
     "validate": {
       "min": 1

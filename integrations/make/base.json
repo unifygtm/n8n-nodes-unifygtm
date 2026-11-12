@@ -5,8 +5,8 @@
     "Accept": "application/json"
   },
   "type": "json",
-  "followRedirect": false,
-  "followAllRedirect": false,
+  "followRedirects": false,
+  "followAllRedirects": false,
   "log": {
     "sanitize": [
       "request.headers.`X-Api-Key`",

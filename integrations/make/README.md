@@ -1,6 +1,6 @@
 # Unify custom app for Make
 
-Status: source draft. No Make account has been connected, and these components have not been executed in Make or submitted for review.
+Status: private app created in Make on November 11, 2026, with the official orange monogram and initial Base configuration. The 79 component sets are prepared locally; module upload, authenticated scenario execution, and review submission remain pending. A temporary token with only `sdk-apps:read` and `sdk-apps:write`, limited to the selected organization, is awaiting owner authorization before SDK upload.
 
 The generated source contains 78 API operation modules and one universal API-call module. `manifest.json` is a local inventory, not a supported one-click import format.
 
@@ -24,5 +24,7 @@ The generated source contains 78 API operation modules and one universal API-cal
 - Analytics is excluded because it uses different credentials and has no documented read-only connection test.
 
 The automated tests check component coverage and structural invariants. They do not evaluate Make IML, validate editor acceptance or prove API execution. These are required next steps in a real Make account.
+
+An additional check against the official Make editor schemas identified and corrected the redirect directive names (`followRedirects` and `followAllRedirects`) and omitted empty parameter help strings. Schema warnings about absent bodies on bodyless POST actions are advisory: those provider operations do not define request bodies. Live validation remains pending.
 
 Sources: [Make custom apps](https://developers.make.com/custom-apps-documentation), [pagination](https://developers.make.com/custom-apps-documentation/component-blocks/api/pagination), [universal module](https://developers.make.com/custom-apps-documentation/app-components/modules/universal-module/rest).
