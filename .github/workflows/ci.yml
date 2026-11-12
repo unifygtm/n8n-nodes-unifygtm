@@ -18,4 +18,9 @@ jobs:
       - run: npm run generate
       - run: git diff --exit-code -- nodes/shared/catalog.json docs/API-COVERAGE.md docs/operation-contracts.json integrations/make
       - run: npm run check
+      - name: Check standalone Make tooling
+        run: |
+          npm ci --ignore-scripts --prefix tools/make-uploader
+          npx tsc --noEmit --strict --target es2022 --module nodenext --moduleResolution nodenext --skipLibCheck tools/make-uploader/upload.mts
+          node tools/make-uploader/upload.mts
       - run: npm pack --dry-run
